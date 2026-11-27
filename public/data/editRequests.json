@@ -1,0 +1,80 @@
+[
+  {
+    "id": "req-01",
+    "eventId": "evt-techspire-2026",
+    "partnerId": "prt-ts-05",
+    "companyName": "IDCloudHost",
+    "requestTitle": "Pembaruan Contact Person (CP Pengganti)",
+    "requestedBy": "Ahmad Fauzi (Staff EEO)",
+    "requestedAt": "2026-11-26 09:40 WIB",
+    "status": "Pending",
+    "oldCp": {
+      "name": "Rina Maharani",
+      "position": "Marketing Specialist",
+      "contact": "0813-4455-6677 / rina@idcloudhost.com",
+      "isAvailable": false,
+      "lastUpdated": "2026-10-12",
+      "notes": "CP lama sudah resign dari divisi partnership, wajib segera update ke CP baru."
+    },
+    "newCp": {
+      "name": "Aditya Permana",
+      "position": "Partnership & Community Executive",
+      "contact": "0812-7766-5544 / aditya.p@idcloudhost.com",
+      "isAvailable": true,
+      "lastUpdated": "2026-11-26",
+      "notes": "CP baru pengganti Rina. Bisa dihubungi jam kerja 09.00 - 17.00 WIB."
+    }
+  },
+  {
+    "id": "req-02",
+    "eventId": "evt-techspire-2026",
+    "partnerId": "prt-ts-01",
+    "companyName": "PT Bank Central Asia Tbk (BCA)",
+    "requestTitle": "Update Kontak & Catatan Ketersediaan CP",
+    "requestedBy": "Dhina Kusuma (Staff EEO)",
+    "requestedAt": "2026-11-26 11:15 WIB",
+    "status": "Pending",
+    "oldCp": {
+      "name": "Dita Danika",
+      "position": "Corporate Partnership Specialist",
+      "contact": "0821-3344-5566 / dita.danika@bca.co.id",
+      "isAvailable": true,
+      "lastUpdated": "2026-11-20",
+      "notes": "Responsif melalui WhatsApp pada jam kerja 09.00 - 17.00 WIB."
+    },
+    "newCp": {
+      "name": "Dita Danika",
+      "position": "Corporate Partnership Specialist",
+      "contact": "0821-3344-5566 / dita.partnership@bca.co.id",
+      "isAvailable": true,
+      "lastUpdated": "2026-11-26",
+      "notes": "CP meminta follow up dikirim ke email divisi baru sebelum telepon."
+    }
+  },
+  {
+    "id": "req-03",
+    "eventId": "evt-techspire-2026",
+    "partnerId": "prt-ts-06",
+    "companyName": "NiagaHoster",
+    "requestTitle": "Pembaruan Contact Person (CP Pengganti)",
+    "requestedBy": "Lisa Hartanto (Staff EEO)",
+    "requestedAt": "2026-11-20 14:10 WIB",
+    "status": "Approved",
+    "decidedBy": "Nathan Wijaya (Manager EEO)",
+    "decidedAt": "2026-11-20 15:00 WIB",
+    "oldCp": {
+      "name": "Budi Santoso",
+      "position": "Brand Lead",
+      "contact": "0812-0000-1111",
+      "isAvailable": false,
+      "lastUpdated": "2026-10-01"
+    },
+    "newCp": {
+      "name": "Rizky Mahendra",
+      "position": "Community Partnership",
+      "contact": "0813-4422-1199 / rizky@niagahoster.co.id",
+      "isAvailable": true,
+      "lastUpdated": "2026-11-20"
+    }
+  }
+]

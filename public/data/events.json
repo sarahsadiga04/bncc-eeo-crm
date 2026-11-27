@@ -1,5 +1,12 @@
 [
   {
+    "id": "evt-techspire-2026",
+    "name": "BNCC TechSpire 2026",
+    "period": "Desember 2026",
+    "targetSponsors": 10,
+    "status": "Aktif"
+  },
+  {
     "id": "evt-ts-2026",
     "name": "TechnoScape 2026",
     "period": "Juni 2026",

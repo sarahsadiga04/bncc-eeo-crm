@@ -1,56 +1,442 @@
 [
   {
+    "id": "prt-ts-01",
+    "companyName": "PT Bank Central Asia Tbk (BCA)",
+    "category": "Sponsor",
+    "eventId": "evt-techspire-2026",
+    "picInternal": "Prabwi Sumiati",
+    "contactPerson": {
+      "name": "Dita Danika",
+      "position": "Corporate Partnership Specialist",
+      "contact": "0821-3344-5566 / dita.danika@bca.co.id",
+      "isAvailable": true,
+      "lastUpdated": "2026-11-20",
+      "notes": "Responsif melalui WhatsApp pada jam kerja 09.00 - 17.00 WIB."
+    },
+    "currentStep": 8,
+    "pipelineStatus": "Follow Up Interest & Set Grade",
+    "proposalSentAt": "2026-11-18",
+    "deadlineD3": "2026-11-21",
+    "deadlineD7": "2026-11-25",
+    "followUpD3Done": true,
+    "followUpD7Done": false,
+    "grade": "-",
+    "sponsorshipValue": 0,
+    "result": "Pending",
+    "meetingSummary": "Tertarik paket sponsorship utama, menunggu konfirmasi final benefit booth & stage adlibs.",
+    "meetings": [
+      {
+        "id": "mtg-01",
+        "date": "2026-11-29",
+        "time": "14:00",
+        "method": "Online",
+        "address": "https://meet.google.com/bncc-bca-pitch",
+        "participants": "Prabwi Sumiati, Nathan Wijaya, Dita Danika",
+        "createdBy": "Prabwi Sumiati"
+      }
+    ],
+    "benefits": [
+      { "id": "ben-1", "label": "Logo di Main Banner & Website", "completed": true },
+      { "id": "ben-2", "label": "Booth Pameran 3x3m di Venue", "completed": false },
+      { "id": "ben-3", "label": "Adlibs MC & Video Bumper", "completed": false }
+    ],
+    "mouStatus": "Belum Dibuat",
+    "notes": "Follow-up interest setelah sesi pitching awal.",
+    "history": [
+      {
+        "id": "h-bca-1",
+        "title": "Proposal Terkirim",
+        "description": "Proposal paket sponsorship BNCC TechSpire 2026 dikirim ke Dita Danika.",
+        "timestamp": "2026-11-18 10:15 WIB",
+        "actor": "Prabwi Sumiati (Staff EEO)"
+      },
+      {
+        "id": "h-bca-2",
+        "title": "Follow-up D+3 Selesai",
+        "description": "CP merespons dan menjadwalkan sesi pitching online.",
+        "timestamp": "2026-11-21 13:40 WIB",
+        "actor": "Prabwi Sumiati (Staff EEO)"
+      }
+    ]
+  },
+  {
+    "id": "prt-ts-02",
+    "companyName": "IDN Media (IDN Times & Duniaku)",
+    "category": "Media Partner",
+    "eventId": "evt-techspire-2026",
+    "picInternal": "Maudy Ayunda",
+    "contactPerson": {
+      "name": "Afgan Syahreza",
+      "position": "Media Partnership Lead",
+      "contact": "0821-7765-1109 / afgan@idn.media",
+      "isAvailable": true,
+      "lastUpdated": "2026-11-15",
+      "notes": "Siap bantu publikasi artikel pre-event dan post-event."
+    },
+    "currentStep": 1,
+    "pipelineStatus": "Follow-Up D+3",
+    "proposalSentAt": "2026-11-15",
+    "deadlineD3": "2026-11-18",
+    "deadlineD7": "2026-11-22",
+    "followUpD3Done": false,
+    "followUpD7Done": false,
+    "grade": "-",
+    "sponsorshipValue": 0,
+    "result": "Pending",
+    "meetings": [],
+    "benefits": [
+      { "id": "ben-idn-1", "label": "Logo Media Partner di Poster", "completed": false },
+      { "id": "ben-idn-2", "label": "Press Release & Social Media Tag", "completed": false }
+    ],
+    "mouStatus": "Belum Dibuat",
+    "notes": "Menunggu konfirmasi balasan email proposal media partner.",
+    "history": [
+      {
+        "id": "h-idn-1",
+        "title": "Proposal Terkirim",
+        "description": "Proposal kolaborasi media partner BNCC TechSpire 2026 dikirim.",
+        "timestamp": "2026-11-15 09:30 WIB",
+        "actor": "Maudy Ayunda (Staff EEO)"
+      }
+    ]
+  },
+  {
+    "id": "prt-ts-03",
+    "companyName": "Traveloka Indonesia",
+    "category": "Sponsor",
+    "eventId": "evt-techspire-2026",
+    "picInternal": "Kevin Sanjaya",
+    "contactPerson": {
+      "name": "Raisa Andriana",
+      "position": "Employer Branding Lead",
+      "contact": "0818-0877-2310 / raisa@traveloka.com",
+      "isAvailable": true,
+      "lastUpdated": "2026-11-11",
+      "notes": "Tertarik membuka talent booth untuk mahasiswa IT."
+    },
+    "currentStep": 2,
+    "pipelineStatus": "Follow-Up D+7",
+    "proposalSentAt": "2026-11-11",
+    "deadlineD3": "2026-11-14",
+    "deadlineD7": "2026-11-18",
+    "followUpD3Done": true,
+    "followUpD7Done": false,
+    "grade": "-",
+    "sponsorshipValue": 0,
+    "result": "Pending",
+    "meetings": [],
+    "benefits": [
+      { "id": "ben-tvl-1", "label": "Logo di Main Stage & Digital Flyer", "completed": false },
+      { "id": "ben-tvl-2", "label": "Sharing Session 20 Menit", "completed": false }
+    ],
+    "mouStatus": "Belum Dibuat",
+    "notes": "Follow-up D+3 sudah dilakukan, menunggu review internal tim branding.",
+    "history": [
+      {
+        "id": "h-tvl-1",
+        "title": "Proposal Terkirim",
+        "description": "Proposal sponsorship dikirim ke tim Employer Branding Traveloka.",
+        "timestamp": "2026-11-11 11:00 WIB",
+        "actor": "Kevin Sanjaya (Staff EEO)"
+      }
+    ]
+  },
+  {
+    "id": "prt-ts-04",
+    "companyName": "Kopi Kenangan",
+    "category": "Media Partner",
+    "eventId": "evt-techspire-2026",
+    "picInternal": "Lisa Hartanto",
+    "contactPerson": {
+      "name": "Dita Anggraini",
+      "position": "Brand Activation",
+      "contact": "0821-3344-5566 / dita@kopikenangan.com",
+      "isAvailable": true,
+      "lastUpdated": "2026-10-23"
+    },
+    "currentStep": 7,
+    "pipelineStatus": "Pitching (Grade & Dealing)",
+    "proposalSentAt": "2026-10-15",
+    "deadlineD3": "2026-10-18",
+    "deadlineD7": "2026-10-22",
+    "followUpD3Done": true,
+    "followUpD7Done": true,
+    "grade": "-",
+    "sponsorshipValue": 0,
+    "result": "Decline",
+    "rejectionReason": "Anggaran Q4 untuk sponsorship event kampus sudah penuh; bersedia dipertimbangkan di Q1 2027.",
+    "meetingSummary": "Tim brand activation tertarik namun kuota Q4 sudah habis.",
+    "meetings": [
+      {
+        "id": "mtg-kk-1",
+        "date": "2026-10-20",
+        "time": "15:00",
+        "method": "Online",
+        "address": "https://zoom.us/j/99887766",
+        "participants": "Lisa Hartanto, Dita Anggraini",
+        "createdBy": "Lisa Hartanto"
+      }
+    ],
+    "benefits": [
+      { "id": "ben-kk-1", "label": "Sampling Product Booth", "completed": true },
+      { "id": "ben-kk-2", "label": "IG Story Mention", "completed": true },
+      { "id": "ben-kk-3", "label": "Logo di Backdrop", "completed": false }
+    ],
+    "mouStatus": "Belum Dibuat",
+    "notes": "Simpan sebagai prospek prioritas periode berikutnya.",
+    "history": [
+      {
+        "id": "h-kk-1",
+        "title": "Status Diperbarui ke Decline",
+        "description": "Anggaran Q4 sudah penuh, dicatat alasan penolakan untuk referensi pengurus baru.",
+        "timestamp": "2026-10-23 16:00 WIB",
+        "actor": "Nathan Wijaya (Manager EEO)"
+      }
+    ]
+  },
+  {
+    "id": "prt-ts-05",
+    "companyName": "IDCloudHost",
+    "category": "Sponsor",
+    "eventId": "evt-techspire-2026",
+    "picInternal": "Ahmad Fauzi",
+    "contactPerson": {
+      "name": "Sari Dewi",
+      "position": "Marketing Partnership",
+      "contact": "0812-7788-9900 / sari@idcloudhost.com",
+      "isAvailable": true,
+      "lastUpdated": "2026-11-10"
+    },
+    "currentStep": 9,
+    "pipelineStatus": "MoU Selesai",
+    "proposalSentAt": "2026-10-28",
+    "deadlineD3": "2026-10-31",
+    "deadlineD7": "2026-11-04",
+    "followUpD3Done": true,
+    "followUpD7Done": true,
+    "grade": "Gold",
+    "sponsorshipValue": 5000000,
+    "result": "Accept",
+    "meetingSummary": "Sepakat paket Gold senilai Rp 5.000.000 + voucher cloud kredit peserta.",
+    "meetings": [
+      {
+        "id": "mtg-idc-1",
+        "date": "2026-11-03",
+        "time": "10:30",
+        "method": "Online",
+        "address": "https://meet.google.com/idc-bncc",
+        "participants": "Ahmad Fauzi, Nathan Wijaya, Sari Dewi",
+        "createdBy": "Ahmad Fauzi"
+      }
+    ],
+    "benefits": [
+      { "id": "ben-idc-1", "label": "Logo Gold di Website & Backdrop", "completed": true },
+      { "id": "ben-idc-2", "label": "Distribusi Voucher Cloud ke Peserta", "completed": true }
+    ],
+    "mouStatus": "Siap Dibuat",
+    "notes": "Partner sangat suportif, kontrak MoU siap digenerate.",
+    "history": [
+      {
+        "id": "h-idc-1",
+        "title": "Menetapkan Grading Gold",
+        "description": "IDCloudHost disetujui pada paket Gold.",
+        "timestamp": "2026-11-10 14:20 WIB",
+        "actor": "Nathan Wijaya (Manager EEO)"
+      }
+    ]
+  },
+  {
+    "id": "prt-ts-06",
+    "companyName": "NiagaHoster",
+    "category": "Sponsor",
+    "eventId": "evt-techspire-2026",
+    "picInternal": "Lisa Hartanto",
+    "contactPerson": {
+      "name": "Rizky Mahendra",
+      "position": "Community Partnership",
+      "contact": "0813-4422-1199 / rizky@niagahoster.co.id",
+      "isAvailable": true,
+      "lastUpdated": "2026-11-12"
+    },
+    "currentStep": 9,
+    "pipelineStatus": "MoU Selesai",
+    "proposalSentAt": "2026-10-20",
+    "deadlineD3": "2026-10-23",
+    "deadlineD7": "2026-10-27",
+    "followUpD3Done": true,
+    "followUpD7Done": true,
+    "grade": "Platinum",
+    "sponsorshipValue": 5000000,
+    "result": "Accept",
+    "meetingSummary": "Deal Platinum sponsorship + workshop speaker.",
+    "meetings": [],
+    "benefits": [
+      { "id": "ben-nh-1", "label": "Main Stage Speaker Slot 30 Menit", "completed": true },
+      { "id": "ben-nh-2", "label": "Logo Platinum Utama & Adlibs", "completed": true }
+    ],
+    "mouStatus": "Selesai",
+    "notes": "MoU sudah ditandatangani kedua belah pihak.",
+    "history": [
+      {
+        "id": "h-nh-1",
+        "title": "MoU Selesai Difinalisasi",
+        "description": "Dokumen MoU Platinum NiagaHoster telah ditandatangani.",
+        "timestamp": "2026-11-18 15:00 WIB",
+        "actor": "Nathan Wijaya (Manager EEO)"
+      }
+    ]
+  },
+  {
+    "id": "prt-ts-07",
+    "companyName": "Dicoding Indonesia",
+    "category": "Sponsor",
+    "eventId": "evt-techspire-2026",
+    "picInternal": "Dhina Kusuma",
+    "contactPerson": {
+      "name": "Sari Wijaya",
+      "position": "Developer Relations",
+      "contact": "0812-3456-7890 / sari@dicoding.com",
+      "isAvailable": true,
+      "lastUpdated": "2026-11-19"
+    },
+    "currentStep": 8,
+    "pipelineStatus": "Grading & MoU",
+    "proposalSentAt": "2026-11-05",
+    "deadlineD3": "2026-11-08",
+    "deadlineD7": "2026-11-12",
+    "followUpD3Done": true,
+    "followUpD7Done": true,
+    "grade": "Gold",
+    "sponsorshipValue": 5000000,
+    "result": "Accept",
+    "meetingSummary": "Sepakat mendukung hadiah kelas Dicoding & dana pembinaan.",
+    "meetings": [],
+    "benefits": [
+      { "id": "ben-dic-1", "label": "Logo Gold di Materi Publikasi", "completed": true },
+      { "id": "ben-dic-2", "label": "Sesi Tech Talk 15 Menit", "completed": false }
+    ],
+    "mouStatus": "Siap Dibuat",
+    "notes": "Siap cetak MoU dari template acara.",
+    "history": [
+      {
+        "id": "h-dic-1",
+        "title": "Deal Accepted",
+        "description": "Dicoding Indonesia menyetujui kerjasama paket Gold.",
+        "timestamp": "2026-11-19 16:10 WIB",
+        "actor": "Nathan Wijaya (Manager EEO)"
+      }
+    ]
+  },
+  {
     "id": "prt-01",
     "companyName": "Dicoding Indonesia",
     "category": "Sponsor",
     "eventId": "evt-ts-2026",
+    "picInternal": "Dhina Kusuma",
     "contactPerson": {
       "name": "Budi Santoso",
+      "position": "Head of Partnership",
       "contact": "0812-3456-7890 / budi@dicoding.com",
       "isAvailable": true,
       "lastUpdated": "2026-11-18"
     },
+    "currentStep": 1,
     "pipelineStatus": "Follow-up D+3",
     "proposalSentAt": "2026-11-22",
+    "deadlineD3": "2026-11-25",
+    "deadlineD7": "2026-11-29",
+    "followUpD3Done": false,
+    "followUpD7Done": false,
     "grade": "Gold",
     "sponsorshipValue": 15000000,
+    "result": "Pending",
+    "meetings": [],
+    "benefits": [
+      { "id": "ben-ts-1", "label": "Logo di Main Banner TechnoScape", "completed": false }
+    ],
     "mouStatus": "Draft",
-    "notes": "Tertarik menjadi sponsor utama workshop & hackathon."
+    "notes": "Tertarik menjadi sponsor utama workshop & hackathon.",
+    "history": [
+      {
+        "id": "h-prt01",
+        "title": "Proposal Terkirim",
+        "description": "Proposal TechnoScape 2026 terkirim ke Budi Santoso.",
+        "timestamp": "2026-11-22 10:00 WIB",
+        "actor": "Dhina Kusuma (Staff EEO)"
+      }
+    ]
   },
   {
     "id": "prt-02",
     "companyName": "PT Bank Central Asia Tbk (BCA)",
     "category": "Sponsor",
     "eventId": "evt-hack-2026",
+    "picInternal": "Nathan Wijaya",
     "contactPerson": {
       "name": "Rina Permata",
+      "position": "Employer Branding",
       "contact": "rina.permata@bca.co.id",
       "isAvailable": true,
       "lastUpdated": "2026-11-12"
     },
-    "pipelineStatus": "Negosiasi",
+    "currentStep": 6,
+    "pipelineStatus": "Pitching",
     "proposalSentAt": "2026-11-10",
+    "deadlineD3": "2026-11-13",
+    "deadlineD7": "2026-11-17",
+    "followUpD3Done": true,
+    "followUpD7Done": true,
     "grade": "Platinum",
     "sponsorshipValue": 30000000,
+    "result": "Accept",
+    "meetings": [
+      {
+        "id": "mtg-hack-1",
+        "date": "2026-11-28",
+        "time": "13:00",
+        "method": "Offline",
+        "address": "Menara BCA Lt. 12, Jakarta Pusat",
+        "participants": "Nathan Wijaya, Rina Permata",
+        "createdBy": "Nathan Wijaya"
+      }
+    ],
+    "benefits": [
+      { "id": "ben-hack-1", "label": "Main Judge Seat & Branding Hackathon", "completed": true }
+    ],
     "mouStatus": "Review Manager",
-    "notes": "Jadwal pitching lanjutan minggu depan."
+    "notes": "Jadwal pitching lanjutan minggu depan.",
+    "history": []
   },
   {
     "id": "prt-03",
     "companyName": "GoTo Impact Foundation",
     "category": "Komunitas",
     "eventId": "evt-csr-2026",
+    "picInternal": "Dhina Kusuma",
     "contactPerson": {
       "name": "Andi Pratama",
+      "position": "Program Manager",
       "contact": "andi@gotoimpact.org",
       "isAvailable": false,
-      "lastUpdated": "2026-10-05"
+      "lastUpdated": "2026-10-05",
+      "notes": "PIC lama sedang cuti panjang, perlu update kontak cadangan."
     },
+    "currentStep": 2,
     "pipelineStatus": "Follow-up D+7",
     "proposalSentAt": "2026-11-14",
+    "deadlineD3": "2026-11-17",
+    "deadlineD7": "2026-11-21",
+    "followUpD3Done": true,
+    "followUpD7Done": false,
     "grade": "Partner",
     "sponsorshipValue": 0,
+    "result": "Pending",
+    "meetings": [],
+    "benefits": [
+      { "id": "ben-csr-1", "label": "Kolaborasi Volunteer & Dokumentasi", "completed": false }
+    ],
     "mouStatus": "Belum Dibuat",
-    "notes": "PIC lama sedang cuti panjang, perlu update kontak cadangan."
+    "notes": "PIC lama sedang cuti panjang, perlu update kontak cadangan.",
+    "history": []
   }
 ]

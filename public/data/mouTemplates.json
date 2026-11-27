@@ -1,0 +1,26 @@
+[
+  {
+    "id": "mou-tpl-01",
+    "eventId": "evt-techspire-2026",
+    "title": "Template MoU Sponsorship Utama — BNCC TechSpire 2026",
+    "type": "Sponsorship",
+    "updatedAt": "2026-11-10",
+    "body": "PERJANJIAN KERJA SAMA SPONSORSHIP\nACARA {{event}} — BINA NUSANTARA COMPUTER CLUB (BNCC)\n\nPada hari ini, tanggal {{tanggal}}, telah disepakati kerja sama sponsorship antara:\n\nPIHAK PERTAMA : Panitia Pelaksana {{event}} — Bina Nusantara Computer Club (BNCC)\nPIHAK KEDUA   : {{nama_company}}, yang dalam hal ini diwakili oleh {{cp}} ({{jabatan_cp}})\n\nPASAL 1 — PAKET & NILAI KONTRIBUSI\nPihak Kedua sepakat berpartisipasi sebagai sponsor pada rangkaian acara {{event}} dengan paket dan nilai kontribusi:\n{{nilai}}\n\nPASAL 2 — KEWAJIBAN & BENEFIT SPONSORSHIP\nPihak Pertama wajib memberikan hak publikasi dan fasilitas kepada Pihak Kedua sesuai daftar kesepakatan (Dealing) berikut:\n{{benefit}}\n\nPASAL 3 — PENUTUP\nDemikian Memorandum of Understanding (MoU) ini dibuat untuk dilaksanakan dengan penuh tanggung jawab oleh kedua belah pihak."
+  },
+  {
+    "id": "mou-tpl-02",
+    "eventId": "evt-techspire-2026",
+    "title": "Template MoU Media Partner & Komunitas — BNCC TechSpire 2026",
+    "type": "Media Partner / Komunitas",
+    "updatedAt": "2026-11-12",
+    "body": "MEMORANDUM OF UNDERSTANDING (MoU)\nMEDIA PARTNER & KOLABORASI KOMUNITAS {{event}}\n\nPada tanggal {{tanggal}}, disepakati kerja sama publikasi antara:\n1. Panitia {{event}} — Bina Nusantara Computer Club (BNCC)\n2. {{nama_company}} (PIC: {{cp}} — {{jabatan_cp}})\n\nBENTUK KERJA SAMA & PAKET:\n{{nilai}}\n\nRINCIAN KESEPAKATAN (BENEFIT TIMBAL BALIK):\n{{benefit}}\n\nPerjanjian ini berlaku sejak ditandatangani hingga seluruh rangkaian acara {{event}} selesai dilaksanakan."
+  },
+  {
+    "id": "mou-tpl-03",
+    "eventId": "evt-ts-2026",
+    "title": "Template MoU Sponsorship — TechnoScape 2026",
+    "type": "Sponsorship",
+    "updatedAt": "2026-11-15",
+    "body": "PERJANJIAN KERJA SAMA SPONSORSHIP {{event}}\n\nTanggal: {{tanggal}}\nPerusahaan: {{nama_company}}\nContact Person: {{cp}} ({{jabatan_cp}})\nPaket & Kontribusi: {{nilai}}\n\nDaftar Benefit:\n{{benefit}}\n\nDisepakati bersama oleh Panitia TechnoScape 2026 BNCC dan {{nama_company}}."
+  }
+]

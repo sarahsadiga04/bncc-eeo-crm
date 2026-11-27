@@ -1,11 +1,23 @@
-import type {BnccEvent, PartnerRecord, UserAccount} from '../types/database';
+import type {
+  ActivityLogItem,
+  BnccEvent,
+  CpEditRequest,
+  MouTemplate,
+  PartnerRecord,
+  PrototypeWorkspaceData,
+  UserAccount,
+} from '../types/database';
 
 const SESSION_STORAGE_KEY = 'gatherin_eeo_session_v1';
+const WORKSPACE_STORAGE_KEY = 'gatherin_eeo_workspace_v2';
 
 export interface PrototypeDatabaseSnapshot {
   users: UserAccount[];
   events: BnccEvent[];
   partners: PartnerRecord[];
+  mouTemplates: MouTemplate[];
+  editRequests: CpEditRequest[];
+  activityLogs: ActivityLogItem[];
 }
 
 async function fetchJsonFile<T>(relativePath: string): Promise<T> {
@@ -22,18 +34,65 @@ async function fetchJsonFile<T>(relativePath: string): Promise<T> {
   return (await response.json()) as T;
 }
 
-export async function loadUsersDatabase(): Promise<UserAccount[]> {
-  return fetchJsonFile<UserAccount[]>('./data/users.json');
-}
-
-export async function loadDatabaseSnapshot(): Promise<PrototypeDatabaseSnapshot> {
-  const [users, events, partners] = await Promise.all([
+export async function loadSeedWorkspaceFromJson(): Promise<PrototypeWorkspaceData> {
+  const [users, events, partners, mouTemplates, editRequests, activityLogs] = await Promise.all([
     fetchJsonFile<UserAccount[]>('./data/users.json'),
     fetchJsonFile<BnccEvent[]>('./data/events.json'),
     fetchJsonFile<PartnerRecord[]>('./data/partners.json'),
+    fetchJsonFile<MouTemplate[]>('./data/mouTemplates.json'),
+    fetchJsonFile<CpEditRequest[]>('./data/editRequests.json'),
+    fetchJsonFile<ActivityLogItem[]>('./data/activityLogs.json'),
   ]);
 
-  return {users, events, partners};
+  return {users, events, partners, mouTemplates, editRequests, activityLogs};
+}
+
+export async function loadDatabaseSnapshot(): Promise<PrototypeDatabaseSnapshot> {
+  const seed = await loadSeedWorkspaceFromJson();
+  const cached = loadWorkspaceCache();
+  if (cached) {
+    return {
+      ...cached,
+      users: seed.users,
+    };
+  }
+  return seed;
+}
+
+export function saveWorkspaceCache(data: PrototypeWorkspaceData): void {
+  try {
+    localStorage.setItem(WORKSPACE_STORAGE_KEY, JSON.stringify(data));
+  } catch {
+    // Ignore storage quota restrictions
+  }
+}
+
+export function loadWorkspaceCache(): PrototypeWorkspaceData | null {
+  try {
+    const raw = localStorage.getItem(WORKSPACE_STORAGE_KEY);
+    if (!raw) return null;
+    const parsed = JSON.parse(raw) as Partial<PrototypeWorkspaceData>;
+    if (
+      !Array.isArray(parsed.events) ||
+      !Array.isArray(parsed.partners) ||
+      !Array.isArray(parsed.mouTemplates) ||
+      !Array.isArray(parsed.editRequests) ||
+      !Array.isArray(parsed.activityLogs)
+    ) {
+      return null;
+    }
+    return parsed as PrototypeWorkspaceData;
+  } catch {
+    return null;
+  }
+}
+
+export function clearWorkspaceCache(): void {
+  try {
+    localStorage.removeItem(WORKSPACE_STORAGE_KEY);
+  } catch {
+    // Ignore storage restrictions
+  }
 }
 
 export function saveSessionUser(user: UserAccount): void {

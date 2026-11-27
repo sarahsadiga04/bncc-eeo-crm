@@ -1,0 +1,58 @@
+[
+  {
+    "id": "log-01",
+    "eventId": "evt-techspire-2026",
+    "category": "Contact Person",
+    "title": "Mengajukan Pembaruan CP",
+    "description": "Mengajukan perubahan email CP PT Bank Central Asia Tbk (BCA) ke dita.partnership@bca.co.id (Menunggu Persetujuan Edit).",
+    "timestamp": "2026-11-26 11:15 WIB",
+    "actorName": "Dhina Kusuma",
+    "actorRole": "Staff EEO",
+    "companyName": "PT Bank Central Asia Tbk (BCA)"
+  },
+  {
+    "id": "log-02",
+    "eventId": "evt-techspire-2026",
+    "category": "Proposal & Pipeline",
+    "title": "Menambahkan Proposal Baru",
+    "description": "Menambahkan proposal Dicoding Indonesia ke dalam database event BNCC TechSpire 2026.",
+    "timestamp": "2026-11-26 09:40 WIB",
+    "actorName": "Ahmad Fauzi",
+    "actorRole": "Staff EEO",
+    "companyName": "Dicoding Indonesia"
+  },
+  {
+    "id": "log-03",
+    "eventId": "evt-techspire-2026",
+    "category": "Pitching & MoU",
+    "title": "Menetapkan Grading Gold",
+    "description": "IDCloudHost disetujui (Accept) pada paket Gold — Rp 5.000.000 dengan 2 poin benefit.",
+    "redactedDescription": "IDCloudHost disetujui (Accept) pada paket kerja sama dengan 2 poin benefit.",
+    "timestamp": "2026-11-24 16:10 WIB",
+    "actorName": "Nathan Wijaya",
+    "actorRole": "Manager EEO",
+    "companyName": "IDCloudHost"
+  },
+  {
+    "id": "log-04",
+    "eventId": "evt-techspire-2026",
+    "category": "Pitching & MoU",
+    "title": "MoU Selesai Difinalisasi",
+    "description": "Dokumen MoU Platinum NiagaHoster (Rp 5.000.000) telah ditandatangani dan dipindahkan ke Selesai.",
+    "redactedDescription": "Dokumen MoU NiagaHoster telah ditandatangani dan dipindahkan ke Selesai.",
+    "timestamp": "2026-11-18 15:00 WIB",
+    "actorName": "Nathan Wijaya",
+    "actorRole": "Manager EEO",
+    "companyName": "NiagaHoster"
+  },
+  {
+    "id": "log-05",
+    "eventId": "evt-techspire-2026",
+    "category": "Impor & Handover",
+    "title": "Handover Pengurus Selesai",
+    "description": "Mengalihkan 2 perusahaan warisan kepengurusan lama ke Dhina Kusuma untuk periode BNCC 2026/2027.",
+    "timestamp": "2026-11-15 14:20 WIB",
+    "actorName": "Nathan Wijaya",
+    "actorRole": "Manager EEO"
+  }
+]
