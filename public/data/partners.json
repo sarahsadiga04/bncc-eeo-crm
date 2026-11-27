@@ -1,0 +1,56 @@
+[
+  {
+    "id": "prt-01",
+    "companyName": "Dicoding Indonesia",
+    "category": "Sponsor",
+    "eventId": "evt-ts-2026",
+    "contactPerson": {
+      "name": "Budi Santoso",
+      "contact": "0812-3456-7890 / budi@dicoding.com",
+      "isAvailable": true,
+      "lastUpdated": "2026-11-18"
+    },
+    "pipelineStatus": "Follow-up D+3",
+    "proposalSentAt": "2026-11-22",
+    "grade": "Gold",
+    "sponsorshipValue": 15000000,
+    "mouStatus": "Draft",
+    "notes": "Tertarik menjadi sponsor utama workshop & hackathon."
+  },
+  {
+    "id": "prt-02",
+    "companyName": "PT Bank Central Asia Tbk (BCA)",
+    "category": "Sponsor",
+    "eventId": "evt-hack-2026",
+    "contactPerson": {
+      "name": "Rina Permata",
+      "contact": "rina.permata@bca.co.id",
+      "isAvailable": true,
+      "lastUpdated": "2026-11-12"
+    },
+    "pipelineStatus": "Negosiasi",
+    "proposalSentAt": "2026-11-10",
+    "grade": "Platinum",
+    "sponsorshipValue": 30000000,
+    "mouStatus": "Review Manager",
+    "notes": "Jadwal pitching lanjutan minggu depan."
+  },
+  {
+    "id": "prt-03",
+    "companyName": "GoTo Impact Foundation",
+    "category": "Komunitas",
+    "eventId": "evt-csr-2026",
+    "contactPerson": {
+      "name": "Andi Pratama",
+      "contact": "andi@gotoimpact.org",
+      "isAvailable": false,
+      "lastUpdated": "2026-10-05"
+    },
+    "pipelineStatus": "Follow-up D+7",
+    "proposalSentAt": "2026-11-14",
+    "grade": "Partner",
+    "sponsorshipValue": 0,
+    "mouStatus": "Belum Dibuat",
+    "notes": "PIC lama sedang cuti panjang, perlu update kontak cadangan."
+  }
+]

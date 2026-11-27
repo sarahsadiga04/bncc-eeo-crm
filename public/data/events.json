@@ -1,0 +1,30 @@
+[
+  {
+    "id": "evt-ts-2026",
+    "name": "TechnoScape 2026",
+    "period": "Juni 2026",
+    "targetSponsors": 12,
+    "status": "Aktif"
+  },
+  {
+    "id": "evt-hack-2026",
+    "name": "BNCC Hackathon",
+    "period": "Agustus 2026",
+    "targetSponsors": 8,
+    "status": "Aktif"
+  },
+  {
+    "id": "evt-tts-2026",
+    "name": "Tech Talk Series",
+    "period": "September 2026",
+    "targetSponsors": 6,
+    "status": "Perencanaan"
+  },
+  {
+    "id": "evt-csr-2026",
+    "name": "BNCC CSR",
+    "period": "November 2026",
+    "targetSponsors": 5,
+    "status": "Perencanaan"
+  }
+]

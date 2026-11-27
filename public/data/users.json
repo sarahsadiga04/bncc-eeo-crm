@@ -1,0 +1,57 @@
+[
+  {
+    "id": "usr-mgr-01",
+    "name": "Nathan Wijaya",
+    "email": "nathan.manager@bncc.net",
+    "password": "eeo2026",
+    "role": "admin",
+    "title": "Manager EEO",
+    "division": "External Event Organizer",
+    "generation": "BNCC 2026/2027",
+    "canViewSponsorshipValue": true
+  },
+  {
+    "id": "usr-mgr-02",
+    "name": "Pengurus Manager EEO",
+    "email": "abcd.manager@bncc.net",
+    "password": "eeo2026",
+    "role": "admin",
+    "title": "Manager EEO",
+    "division": "External Event Organizer",
+    "generation": "BNCC 2026/2027",
+    "canViewSponsorshipValue": true
+  },
+  {
+    "id": "usr-mgr-03",
+    "name": "Bendahara Umum BNCC",
+    "email": "bendahara@bncc.net",
+    "password": "eeo2026",
+    "role": "admin",
+    "title": "Bendahara",
+    "division": "Keuangan & Sponsorship",
+    "generation": "BNCC 2026/2027",
+    "canViewSponsorshipValue": true
+  },
+  {
+    "id": "usr-stf-01",
+    "name": "Dhina Kusuma",
+    "email": "dhina.staff@bncc.net",
+    "password": "eeo2026",
+    "role": "member",
+    "title": "Staff EEO",
+    "division": "External Event Organizer",
+    "generation": "BNCC 2026/2027",
+    "canViewSponsorshipValue": false
+  },
+  {
+    "id": "usr-stf-02",
+    "name": "Staff EEO BNCC",
+    "email": "staff.eeo@bncc.net",
+    "password": "eeo2026",
+    "role": "member",
+    "title": "Staff EEO",
+    "division": "External Event Organizer",
+    "generation": "BNCC 2026/2027",
+    "canViewSponsorshipValue": false
+  }
+]
