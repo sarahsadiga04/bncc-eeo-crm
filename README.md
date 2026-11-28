@@ -1,4 +1,4 @@
-# Gather.in — BNCC EEO Sponsorship & Partner CRM
+# Gather.in - BNCC EEO Sponsorship & Partner CRM
 
 Prototype sistem manajemen partner, tracking proposal sponsorship, pengingat follow-up otomatis **D+3 / D+7**, persetujuan pembaruan Contact Person (CP), dan generator dokumen **MoU** per event untuk **External Event Organizer (EEO) BNCC**.
 
@@ -14,7 +14,7 @@ Seluruh data awal (*seed data*) disimpan di folder `public/data/`:
 | :--- | :--- |
 | `public/data/users.json` | Daftar akun pengurus (`Manager EEO`, `Bendahara`, dan `Staff EEO`), role (`admin` / `member`), serta flag hak akses `canViewSponsorshipValue`. |
 | `public/data/events.json` | Daftar event BNCC (`BNCC TechSpire 2026`, `TechnoScape 2026`, `BNCC Hackathon`, `Tech Talk Series`, `BNCC CSR`). |
-| `public/data/partners.json` | Data partner per event, CP & status ketersediaan, tahapan 9-langkah pipeline, tanggal kirim proposal, deadline `D+3` & `D+7`, jadwal meeting, checklist benefit, grade, nominal sponsorship, status MoU, dan riwayat aktivitas partner. |
+| `public/data/partners.json` | Data partner per event, CP & status ketersediaan, tahapan 9 langkah pipeline, tanggal kirim proposal, deadline `D+3` & `D+7`, jadwal meeting, checklist benefit, grade, nominal sponsorship, status MoU, dan riwayat aktivitas partner. |
 | `public/data/mouTemplates.json` | Template naskah MoU per event (Sponsorship dan Media Partner / Komunitas) dengan placeholder dinamis (`{{event}}`, `{{tanggal}}`, `{{nama_company}}`, `{{cp}}`, `{{jabatan_cp}}`, `{{nilai}}`, `{{benefit}}`). |
 | `public/data/editRequests.json` | Antrean permintaan pembaruan data Contact Person (CP) yang diajukan oleh Staff EEO untuk ditinjau (`Setujui & Terapkan` / `Tolak`) oleh Manager EEO. |
 | `public/data/activityLogs.json` | Audit trail seluruh perubahan status proposal, update CP, keputusan pitching/grading, finalisasi MoU, impor spreadsheet, dan handover pengurus. |
@@ -36,8 +36,8 @@ Seluruh data awal (*seed data*) disimpan di folder `public/data/`:
    - Saat **Proposal Baru** disimpan (atau saat **Impor Spreadsheet** dari Google Sheets / CSV dijalankan), sistem (`src/utils/pipeline.ts`) menghitung otomatis:
      - `deadlineD3 = proposalSentAt + 3 hari`
      - `deadlineD7 = proposalSentAt + 7 hari`
-   - Proposal berstatus `Pending` yang telah melewati jadwal D+3 / D+7 otomatis muncul di panel merah **Perlu Follow-Up Segera** pada Dashboard dan ditandai **Overdue** di Daftar Sponsorship.
-   - Menekan **Selesai Follow-Up** menandai tahapan selesai, memajukan pipeline ke tahap berikutnya, dan mencatatnya ke `history` partner serta **Log Aktivitas**.
+   - Proposal berstatus `Pending` yang telah melewati jadwal D+3 / D+7 otomatis muncul di panel merah **Perlu Follow Up Segera** pada Dashboard dan ditandai **Overdue** di Daftar Sponsorship.
+   - Menekan **Selesai Follow Up** menandai tahapan selesai, memajukan pipeline ke tahap berikutnya, dan mencatatnya ke `history` partner serta **Log Aktivitas**.
 
 4. **Alur Pembaruan Contact Person (CP) & Persetujuan Edit**
    - **Staff EEO (`member`)** yang mengajukan perubahan CP melalui tombol **Tambah / Edit CP** akan membuat entri baru di `editRequests` berstatus `Pending` (data partner utama tidak langsung berubah).
@@ -65,7 +65,7 @@ Sesuai dokumen Study Case EEO dan PRD Cluster 5:
 | **Pembaruan Contact Person (CP)** | Diterapkan langsung ke database | Mengajukan *Edit Request* ke Manager |
 | **Buat Event Baru (`+ Event Baru`)** | **Diizinkan** | **Tidak Diizinkan** |
 | **Kelola & Finalisasi Template MoU** | **Buat, Edit Template, & Tandai MoU Selesai** | Hanya melihat template & pratinjau naskah tanpa nominal `Rp` |
-| **Input Proposal Baru, Follow-Up D+3/D+7, Meeting, Checklist Benefit, Impor Spreadsheet, Log Aktivitas** | **Diizinkan** | **Diizinkan** (nominal `Rp` pada Log diredaksi otomatis) |
+| **Input Proposal Baru, Follow Up D+3/D+7, Meeting, Checklist Benefit, Impor Spreadsheet, Log Aktivitas** | **Diizinkan** | **Diizinkan** (nominal `Rp` pada Log diredaksi otomatis) |
 
 ---
 
