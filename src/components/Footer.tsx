@@ -6,22 +6,37 @@ export function Footer() {
   };
 
   return (
-    <footer className="bg-[#2454AB] text-white">
-      <div className="mx-auto flex max-w-[1440px] flex-col items-center justify-between gap-4 px-5 py-16 sm:flex-row sm:px-10 sm:py-20 md:px-14 lg:px-[69px]">
+    <footer className="relative overflow-hidden bg-[#2454AB] text-white">
+      {/* Smooth White Organic Wave Transition matching new HomePage SVG */}
+      <div className="relative z-10 w-full overflow-hidden leading-none">
+        <svg
+          viewBox="0 1835 1440 105"
+          preserveAspectRatio="none"
+          className="block -mt-px h-[58px] sm:h-[90px] lg:h-[110px] w-full"
+          aria-hidden="true"
+        >
+          <path
+            d="M954.022 1919.3C1289.74 1918.69 1575.2 1838.71 1575.2 1838.71L1691 1665L-213 1693.06V1939C-213 1939 -1.98677 1886.12 226.601 1869.75C455.188 1853.39 711.718 1919.74 954.022 1919.3Z"
+            fill="#FFFFFF"
+          />
+        </svg>
+      </div>
+
+      <div className="mx-auto flex max-w-[1440px] flex-col items-center justify-between gap-6 px-5 pt-10 pb-14 sm:flex-row sm:px-10 sm:pt-14 sm:pb-20 md:px-14 lg:px-[69px] lg:pt-16 lg:pb-24">
         <div className="text-center sm:text-left">
-          <p className="text-lg font-extrabold tracking-tight">Gather.in</p>
-          <p className="mt-1 text-xs sm:text-sm text-white/80">
-            External Event Organizer · Bina Nusantara Computer Club
+          <p className="text-xl sm:text-[22px] font-extrabold tracking-tight">Gather.in</p>
+          <p className="mt-1.5 text-xs sm:text-sm text-white/85">
+            External Event Organizer Bina Nusantara Computer Club
           </p>
         </div>
 
         <button
           type="button"
           onClick={scrollToTop}
-          className="inline-flex min-h-[44px] items-center gap-2 rounded-[10px] border border-white/25 bg-[#2C63AB]/70 px-4 py-2 text-xs sm:text-sm font-semibold text-white transition-colors hover:bg-[#2C63AB] cursor-pointer"
+          className="inline-flex min-h-[48px] sm:min-h-[58px] items-center justify-center gap-3 rounded-[10px] border border-white/20 bg-[#2C63AB]/85 px-6 sm:px-7 py-3 text-sm sm:text-[15px] font-semibold text-white transition-all duration-150 hover:-translate-y-0.5 hover:bg-[#2C63AB] active:translate-y-0 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white cursor-pointer"
         >
-          <span>Kembali ke Atas</span>
-          <ArrowUp className="h-4 w-4" aria-hidden="true" />
+          <span>Kembali Ke Atas</span>
+          <ArrowUp className="h-4 w-4 stroke-[2]" aria-hidden="true" />
         </button>
       </div>
     </footer>
