@@ -1,6 +1,8 @@
 import {useState, type FormEvent} from 'react';
 import {AlertCircle} from 'lucide-react';
+import {AnimatePresence, motion} from 'motion/react';
 import type {BnccEvent, PartnerCategory, PartnerRecord, UserAccount} from '../../types/database';
+import {alertVariants} from '../../utils/motion';
 import {calculateFollowUpDeadlines, getTodayIso} from '../../utils/pipeline';
 
 interface ProposalFormViewProps {
@@ -122,15 +124,22 @@ export function ProposalFormView({
       </p>
 
       <form onSubmit={handleSubmit} noValidate className="mt-6 space-y-5">
-        {error && (
-          <div
-            role="alert"
-            className="flex items-start gap-2 rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm font-medium text-red-700"
-          >
-            <AlertCircle className="mt-0.5 h-4 w-4 shrink-0" aria-hidden="true" />
-            <span>{error}</span>
-          </div>
-        )}
+        <AnimatePresence>
+          {error && (
+            <motion.div
+              key="proposal-form-error"
+              variants={alertVariants}
+              initial="hidden"
+              animate="visible"
+              exit="exit"
+              role="alert"
+              className="flex items-start gap-2 rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm font-medium text-red-700"
+            >
+              <AlertCircle className="mt-0.5 h-4 w-4 shrink-0" aria-hidden="true" />
+              <span>{error}</span>
+            </motion.div>
+          )}
+        </AnimatePresence>
 
         <div>
           <label htmlFor="prop-company" className="block text-xs sm:text-sm font-bold text-[#1E1E1E]">

@@ -1,11 +1,17 @@
 import {useState, type FormEvent} from 'react';
 import {Check, Copy, FileText, Plus, X} from 'lucide-react';
+import {AnimatePresence, motion} from 'motion/react';
 import type {
   BnccEvent,
   MouTemplate,
   PartnerRecord,
   UserAccount,
 } from '../../types/database';
+import {
+  EASE_OUT_EXPO,
+  modalBackdropVariants,
+  modalPanelVariants,
+} from '../../utils/motion';
 import {
   formatRupiah,
   getTodayIso,
@@ -211,9 +217,17 @@ export function MouTemplateView({
         </div>
       ) : (
         <div className="grid grid-cols-1 gap-5 lg:grid-cols-2">
-          {templates.map((tpl) => (
-            <article
+          {templates.map((tpl, index) => (
+            <motion.article
               key={tpl.id}
+              initial={{opacity: 0, y: 12}}
+              animate={{opacity: 1, y: 0}}
+              transition={{
+                duration: 0.25,
+                delay: Math.min(index * 0.05, 0.25),
+                ease: EASE_OUT_EXPO,
+              }}
+              whileHover={{y: -2, transition: {duration: 0.15}}}
               className="flex flex-col rounded-2xl border border-[#DBEAFE] bg-white p-5 sm:p-6"
             >
               <div className="flex items-start justify-between gap-3">
@@ -243,20 +257,32 @@ export function MouTemplateView({
               <pre className="mt-4 flex-1 whitespace-pre-wrap rounded-xl border border-slate-200 bg-[#F8FBFF] p-4 font-sans text-xs leading-relaxed text-[#334155]">
                 {tpl.body}
               </pre>
-            </article>
+            </motion.article>
           ))}
         </div>
       )}
 
       {/* Modal: Create / Edit Template MoU (Manager Only) */}
-      {(creatingNew || editingTemplate) && isManager && (
-        <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/55 p-4"
-          role="dialog"
-          aria-modal="true"
-          aria-labelledby="tpl-modal-title"
-        >
-          <div className="w-full max-w-[680px] rounded-2xl bg-white p-6 shadow-2xl">
+      <AnimatePresence>
+        {(creatingNew || editingTemplate) && isManager && (
+          <motion.div
+            key="mou-template-modal"
+            variants={modalBackdropVariants}
+            initial="hidden"
+            animate="visible"
+            exit="exit"
+            className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/55 p-4"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="tpl-modal-title"
+          >
+            <motion.div
+              variants={modalPanelVariants}
+              initial="hidden"
+              animate="visible"
+              exit="exit"
+              className="w-full max-w-[680px] rounded-2xl bg-white p-6 shadow-2xl"
+            >
             <div className="flex items-center justify-between gap-3">
               <h2 id="tpl-modal-title" className="text-lg sm:text-xl font-extrabold text-[#0755B1]">
                 {editingTemplate ? 'Edit Template MoU' : 'Buat Template MoU Baru'}
@@ -340,19 +366,32 @@ export function MouTemplateView({
                 </button>
               </div>
             </form>
-          </div>
-        </div>
-      )}
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* Modal: Generated MoU Document Preview */}
-      {activePartnerForMou && (
-        <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/55 p-4 overflow-y-auto"
-          role="dialog"
-          aria-modal="true"
-          aria-labelledby="doc-mou-title"
-        >
-          <div className="my-auto w-full max-w-[820px] rounded-2xl bg-white p-6 shadow-2xl">
+      <AnimatePresence>
+        {activePartnerForMou && (
+          <motion.div
+            key="mou-doc-modal"
+            variants={modalBackdropVariants}
+            initial="hidden"
+            animate="visible"
+            exit="exit"
+            className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/55 p-4 overflow-y-auto"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="doc-mou-title"
+          >
+            <motion.div
+              variants={modalPanelVariants}
+              initial="hidden"
+              animate="visible"
+              exit="exit"
+              className="my-auto w-full max-w-[820px] rounded-2xl bg-white p-6 shadow-2xl"
+            >
             <div className="flex items-center justify-between gap-3 border-b border-slate-100 pb-4">
               <h2 id="doc-mou-title" className="text-lg sm:text-xl font-extrabold text-[#1E1E1E]">
                 Dokumen MoU — {activePartnerForMou.companyName}
@@ -462,9 +501,10 @@ export function MouTemplateView({
                 </button>
               )}
             </div>
-          </div>
-        </div>
-      )}
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }

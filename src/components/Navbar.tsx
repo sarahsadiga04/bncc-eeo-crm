@@ -1,5 +1,7 @@
 import {useState} from 'react';
 import {ChevronRight, Menu, X} from 'lucide-react';
+import {AnimatePresence, motion} from 'motion/react';
+import {EASE_OUT_EXPO} from '../utils/motion';
 
 interface NavbarProps {
   onScrollToLogin: () => void;
@@ -20,7 +22,12 @@ export function Navbar({
   };
 
   return (
-    <header className="relative z-30 w-full">
+    <motion.header
+      initial={{opacity: 0, y: -12}}
+      animate={{opacity: 1, y: 0}}
+      transition={{duration: 0.4, ease: EASE_OUT_EXPO}}
+      className="relative z-30 w-full"
+    >
       <div className="mx-auto flex max-w-[1440px] items-center justify-between gap-4 px-5 py-6 sm:px-10 md:px-14 lg:px-[69px] lg:pt-12">
         {/* Brand Lockup matching HomePage SVG */}
         <div className="flex items-center gap-3 sm:gap-5 min-w-0">
@@ -84,32 +91,38 @@ export function Navbar({
       </div>
 
       {/* Responsive Mobile Navigation Drawer */}
-      {mobileMenuOpen && (
-        <nav
-          id="mobile-nav-drawer"
-          aria-label="Navigasi Mobile"
-          className="mx-5 mb-4 rounded-2xl border border-white/25 bg-[#1C4D9C]/95 p-3 shadow-xl backdrop-blur-sm md:hidden"
-        >
-          <div className="flex flex-col gap-1">
-            <button
-              type="button"
-              onClick={() => handleMobileAction(onScrollToFeatures)}
-              className="flex min-h-[44px] w-full items-center justify-between rounded-xl px-4 py-2.5 text-left text-sm font-semibold text-white hover:bg-white/10"
-            >
-              <span>Fitur Utama EEO</span>
-              <ChevronRight className="h-4 w-4 text-[#BCD9FC]" aria-hidden="true" />
-            </button>
-            <button
-              type="button"
-              onClick={() => handleMobileAction(onScrollToLogin)}
-              className="flex min-h-[44px] w-full items-center justify-between rounded-xl px-4 py-2.5 text-left text-sm font-semibold text-white hover:bg-white/10"
-            >
-              <span>{isAuthenticated ? 'Panel Sesi Login' : 'Pilih Role & Login'}</span>
-              <ChevronRight className="h-4 w-4 text-[#BCD9FC]" aria-hidden="true" />
-            </button>
-          </div>
-        </nav>
-      )}
-    </header>
+      <AnimatePresence>
+        {mobileMenuOpen && (
+          <motion.nav
+            id="mobile-nav-drawer"
+            aria-label="Navigasi Mobile"
+            initial={{opacity: 0, y: -10, scale: 0.98}}
+            animate={{opacity: 1, y: 0, scale: 1}}
+            exit={{opacity: 0, y: -8, scale: 0.98}}
+            transition={{duration: 0.2, ease: EASE_OUT_EXPO}}
+            className="mx-5 mb-4 rounded-2xl border border-white/25 bg-[#1C4D9C]/95 p-3 shadow-xl backdrop-blur-sm md:hidden"
+          >
+            <div className="flex flex-col gap-1">
+              <button
+                type="button"
+                onClick={() => handleMobileAction(onScrollToFeatures)}
+                className="flex min-h-[44px] w-full items-center justify-between rounded-xl px-4 py-2.5 text-left text-sm font-semibold text-white hover:bg-white/10"
+              >
+                <span>Fitur Utama EEO</span>
+                <ChevronRight className="h-4 w-4 text-[#BCD9FC]" aria-hidden="true" />
+              </button>
+              <button
+                type="button"
+                onClick={() => handleMobileAction(onScrollToLogin)}
+                className="flex min-h-[44px] w-full items-center justify-between rounded-xl px-4 py-2.5 text-left text-sm font-semibold text-white hover:bg-white/10"
+              >
+                <span>{isAuthenticated ? 'Panel Sesi Login' : 'Pilih Role & Login'}</span>
+                <ChevronRight className="h-4 w-4 text-[#BCD9FC]" aria-hidden="true" />
+              </button>
+            </div>
+          </motion.nav>
+        )}
+      </AnimatePresence>
+    </motion.header>
   );
 }

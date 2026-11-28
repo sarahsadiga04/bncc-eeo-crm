@@ -1,4 +1,6 @@
 import {useEffect, useState} from 'react';
+import {AnimatePresence, motion} from 'motion/react';
+import {EASE_OUT_EXPO} from '../../utils/motion';
 import type {
   ActivityCategory,
   ActivityLogItem,
@@ -640,98 +642,111 @@ export function WorkspaceApp({
 
       <main className="flex-1 min-w-0 px-4 py-5 sm:px-6 sm:py-6 lg:px-8 lg:py-7">
         <div className="mx-auto max-w-[1160px]">
-          {activeView === 'dashboard' && (
-            <DashboardOverview
-              user={user}
-              events={workspace.events}
-              activeEvent={activeEvent}
-              partners={eventPartners}
-              onSelectEvent={setActiveEventId}
-              onNavigate={handleSelectView}
-              onOpenNewEventModal={() => setShowNewEventModal(true)}
-              onOpenPartnerDetail={setSelectedPartnerId}
-              onMarkFollowUpDone={handleMarkFollowUpDone}
-            />
-          )}
+          <motion.div
+            key={activeView}
+            initial={{opacity: 0, y: 10}}
+            animate={{opacity: 1, y: 0}}
+            transition={{duration: 0.2, ease: EASE_OUT_EXPO}}
+          >
+            {activeView === 'dashboard' && (
+              <DashboardOverview
+                user={user}
+                events={workspace.events}
+                activeEvent={activeEvent}
+                partners={eventPartners}
+                onSelectEvent={setActiveEventId}
+                onNavigate={handleSelectView}
+                onOpenNewEventModal={() => setShowNewEventModal(true)}
+                onOpenPartnerDetail={setSelectedPartnerId}
+                onMarkFollowUpDone={handleMarkFollowUpDone}
+              />
+            )}
 
-          {activeView === 'sponsorship' && (
-            <SponsorshipListView
-              user={user}
-              activeEvent={activeEvent}
-              partners={eventPartners}
-              onOpenNewProposal={() => setActiveView('proposal-new')}
-              onOpenPartnerDetail={setSelectedPartnerId}
-            />
-          )}
+            {activeView === 'sponsorship' && (
+              <SponsorshipListView
+                user={user}
+                activeEvent={activeEvent}
+                partners={eventPartners}
+                onOpenNewProposal={() => setActiveView('proposal-new')}
+                onOpenPartnerDetail={setSelectedPartnerId}
+              />
+            )}
 
-          {activeView === 'proposal-new' && (
-            <ProposalFormView
-              user={user}
-              activeEvent={activeEvent}
-              onCancel={() => setActiveView('sponsorship')}
-              onSaveProposal={handleSaveNewProposal}
-            />
-          )}
+            {activeView === 'proposal-new' && (
+              <ProposalFormView
+                user={user}
+                activeEvent={activeEvent}
+                onCancel={() => setActiveView('sponsorship')}
+                onSaveProposal={handleSaveNewProposal}
+              />
+            )}
 
-          {activeView === 'mou-templates' && (
-            <MouTemplateView
-              user={user}
-              activeEvent={activeEvent}
-              templates={eventTemplates}
-              partners={eventPartners}
-              onSaveTemplate={handleSaveMouTemplate}
-              onFinalizeMou={handleFinalizeMou}
-            />
-          )}
+            {activeView === 'mou-templates' && (
+              <MouTemplateView
+                user={user}
+                activeEvent={activeEvent}
+                templates={eventTemplates}
+                partners={eventPartners}
+                onSaveTemplate={handleSaveMouTemplate}
+                onFinalizeMou={handleFinalizeMou}
+              />
+            )}
 
-          {activeView === 'edit-approvals' && isManager && (
-            <EditApprovalView
-              activeEvent={activeEvent}
-              requests={eventEditRequests}
-              onApproveRequest={handleApproveEditRequest}
-              onRejectRequest={handleRejectEditRequest}
-            />
-          )}
+            {activeView === 'edit-approvals' && isManager && (
+              <EditApprovalView
+                activeEvent={activeEvent}
+                requests={eventEditRequests}
+                onApproveRequest={handleApproveEditRequest}
+                onRejectRequest={handleRejectEditRequest}
+              />
+            )}
 
-          {activeView === 'import-spreadsheet' && (
-            <SpreadsheetImportView
-              user={user}
-              activeEvent={activeEvent}
-              onImportPartners={handleImportPartners}
-              onGoToSponsorshipList={() => setActiveView('sponsorship')}
-            />
-          )}
+            {activeView === 'import-spreadsheet' && (
+              <SpreadsheetImportView
+                user={user}
+                activeEvent={activeEvent}
+                onImportPartners={handleImportPartners}
+                onGoToSponsorshipList={() => setActiveView('sponsorship')}
+              />
+            )}
 
-          {activeView === 'activity-log' && (
-            <ActivityLogView
-              user={user}
-              activeEvent={activeEvent}
-              logs={eventLogs}
-            />
-          )}
+            {activeView === 'activity-log' && (
+              <ActivityLogView
+                user={user}
+                activeEvent={activeEvent}
+                logs={eventLogs}
+              />
+            )}
+          </motion.div>
         </div>
       </main>
 
-      {selectedPartner && (
-        <PartnerDetailModal
-          partner={selectedPartner}
-          user={user}
-          onClose={() => setSelectedPartnerId(null)}
-          onUpdateProgress={handleUpdateProgress}
-          onAddMeeting={handleAddMeeting}
-          onSavePitching={handleSavePitching}
-          onToggleBenefit={handleToggleBenefit}
-          onAddBenefit={handleAddBenefit}
-          onSubmitCpEdit={handleSubmitCpEdit}
-        />
-      )}
+      <AnimatePresence>
+        {selectedPartner && (
+          <PartnerDetailModal
+            key={selectedPartner.id}
+            partner={selectedPartner}
+            user={user}
+            onClose={() => setSelectedPartnerId(null)}
+            onUpdateProgress={handleUpdateProgress}
+            onAddMeeting={handleAddMeeting}
+            onSavePitching={handleSavePitching}
+            onToggleBenefit={handleToggleBenefit}
+            onAddBenefit={handleAddBenefit}
+            onSubmitCpEdit={handleSubmitCpEdit}
+          />
+        )}
+      </AnimatePresence>
 
-      {showNewEventModal && isManager && (
-        <NewEventModal
-          onClose={() => setShowNewEventModal(false)}
-          onCreateEvent={handleCreateEvent}
-        />
-      )}
+      <AnimatePresence>
+        {showNewEventModal && isManager && (
+          <NewEventModal
+            key="new-event-modal"
+            onClose={() => setShowNewEventModal(false)}
+            onCreateEvent={handleCreateEvent}
+          />
+        )}
+      </AnimatePresence>
     </div>
   );
 }

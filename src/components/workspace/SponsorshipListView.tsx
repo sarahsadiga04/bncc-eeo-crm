@@ -1,6 +1,12 @@
 import {useMemo, useState} from 'react';
 import {Bell, Phone, Plus, Search, User} from 'lucide-react';
+import {motion} from 'motion/react';
 import type {BnccEvent, PartnerRecord, UserAccount} from '../../types/database';
+import {
+  EASE_OUT_EXPO,
+  staggerContainerVariants,
+  staggerItemVariants,
+} from '../../utils/motion';
 import {
   computeEventSummary,
   formatRupiah,
@@ -112,8 +118,17 @@ export function SponsorshipListView({
       </div>
 
       {/* 3 Status KPI Summary Cards */}
-      <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
-        <div className="rounded-2xl border border-[#DBEAFE] bg-white p-5">
+      <motion.div
+        variants={staggerContainerVariants}
+        initial="hidden"
+        animate="visible"
+        className="grid grid-cols-1 gap-4 md:grid-cols-3"
+      >
+        <motion.div
+          variants={staggerItemVariants}
+          whileHover={{y: -2, transition: {duration: 0.15}}}
+          className="rounded-2xl border border-[#DBEAFE] bg-white p-5"
+        >
           <div className="flex items-center justify-between gap-2">
             <p className="text-[11px] font-extrabold tracking-wider text-[#B45309] uppercase">
               Status : Pending
@@ -126,9 +141,13 @@ export function SponsorshipListView({
             {summary.pendingCount}
           </p>
           <p className="mt-1 text-xs text-[#64748B]">Sedang follow-up D+3/D+7</p>
-        </div>
+        </motion.div>
 
-        <div className="rounded-2xl border border-[#DBEAFE] bg-white p-5">
+        <motion.div
+          variants={staggerItemVariants}
+          whileHover={{y: -2, transition: {duration: 0.15}}}
+          className="rounded-2xl border border-[#DBEAFE] bg-white p-5"
+        >
           <div className="flex items-center justify-between gap-2">
             <p className="text-[11px] font-extrabold tracking-wider text-[#DC2626] uppercase">
               Status : Decline
@@ -141,9 +160,13 @@ export function SponsorshipListView({
             {summary.declineCount}
           </p>
           <p className="mt-1 text-xs text-[#64748B]">Wajib tercatat alasan penolakan</p>
-        </div>
+        </motion.div>
 
-        <div className="rounded-2xl border border-[#DBEAFE] bg-white p-5">
+        <motion.div
+          variants={staggerItemVariants}
+          whileHover={{y: -2, transition: {duration: 0.15}}}
+          className="rounded-2xl border border-[#DBEAFE] bg-white p-5"
+        >
           <div className="flex items-center justify-between gap-2">
             <p className="text-[11px] font-extrabold tracking-wider text-[#15803D] uppercase">
               Status : Accept
@@ -160,8 +183,8 @@ export function SponsorshipListView({
               ? `Total Deal : ${formatRupiah(summary.totalDealValue)}`
               : 'Deal yang berhasil'}
           </p>
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
 
       {/* Partner List Card */}
       <div className="rounded-2xl border border-[#DBEAFE] bg-white p-4 sm:p-5">
@@ -220,13 +243,22 @@ export function SponsorshipListView({
           </div>
         ) : (
           <div className="mt-3 space-y-2.5">
-            {filteredPartners.map((partner) => {
+            {filteredPartners.map((partner, index) => {
               const urgency = getPartnerUrgency(partner);
               return (
-                <button
+                <motion.button
                   key={partner.id}
                   type="button"
                   onClick={() => onOpenPartnerDetail(partner.id)}
+                  initial={{opacity: 0, y: 8}}
+                  animate={{opacity: 1, y: 0}}
+                  transition={{
+                    duration: 0.22,
+                    delay: Math.min(index * 0.03, 0.22),
+                    ease: EASE_OUT_EXPO,
+                  }}
+                  whileHover={{y: -1.5, transition: {duration: 0.14}}}
+                  whileTap={{scale: 0.995}}
                   className={`w-full rounded-xl border p-4 text-left transition-all cursor-pointer focus-visible:outline-2 focus-visible:outline-[#0755B1] ${
                     urgency.isOverdue
                       ? 'border-red-200 bg-red-50/40 hover:border-red-300'
@@ -307,7 +339,7 @@ export function SponsorshipListView({
                       </div>
                     </div>
                   </div>
-                </button>
+                </motion.button>
               );
             })}
           </div>

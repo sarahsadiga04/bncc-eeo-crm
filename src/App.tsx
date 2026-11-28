@@ -4,6 +4,7 @@
  */
 
 import {useEffect, useState} from 'react';
+import {MotionConfig, motion} from 'motion/react';
 import {Footer} from './components/Footer';
 import {HeroSection} from './components/HeroSection';
 import {LoginSection} from './components/LoginSection';
@@ -19,6 +20,7 @@ import {
   type PrototypeDatabaseSnapshot,
 } from './services/jsonDb';
 import type {PrototypeWorkspaceData, UserAccount, UserRole} from './types/database';
+import {EASE_OUT_EXPO} from './utils/motion';
 
 export default function App() {
   const [selectedRole, setSelectedRole] = useState<UserRole>('admin');
@@ -107,40 +109,53 @@ export default function App() {
       });
   };
 
-  if (currentUser && dbSnapshot) {
-    return (
-      <WorkspaceApp
-        user={currentUser}
-        workspace={dbSnapshot}
-        onUpdateWorkspace={handleUpdateWorkspace}
-        onResetDemoData={handleResetDemoData}
-        onLogout={handleLogout}
-      />
-    );
-  }
-
   return (
-    <div className="min-h-screen flex flex-col bg-white text-[#1E1E1E]">
-      <main className="flex-1">
-        <HeroSection
-          onScrollToLogin={() => scrollToElement('login-section')}
-          onScrollToFeatures={() => scrollToElement('fitur-utama')}
-          isAuthenticated={currentUser !== null}
-        />
+    <MotionConfig reducedMotion="user">
+      {currentUser && dbSnapshot ? (
+        <motion.div
+          key="workspace-shell"
+          initial={{opacity: 0}}
+          animate={{opacity: 1}}
+          transition={{duration: 0.24, ease: EASE_OUT_EXPO}}
+        >
+          <WorkspaceApp
+            user={currentUser}
+            workspace={dbSnapshot}
+            onUpdateWorkspace={handleUpdateWorkspace}
+            onResetDemoData={handleResetDemoData}
+            onLogout={handleLogout}
+          />
+        </motion.div>
+      ) : (
+        <motion.div
+          key="landing-shell"
+          initial={{opacity: 0}}
+          animate={{opacity: 1}}
+          transition={{duration: 0.24, ease: EASE_OUT_EXPO}}
+          className="min-h-screen flex flex-col bg-white text-[#1E1E1E]"
+        >
+          <main className="flex-1">
+            <HeroSection
+              onScrollToLogin={() => scrollToElement('login-section')}
+              onScrollToFeatures={() => scrollToElement('fitur-utama')}
+              isAuthenticated={currentUser !== null}
+            />
 
-        <LoginSection
-          selectedRole={selectedRole}
-          onSelectRole={setSelectedRole}
-          currentUser={currentUser}
-          dbSnapshot={dbSnapshot}
-          dbError={dbError}
-          isLoadingDb={isLoadingDb}
-          onLoginSuccess={handleLoginSuccess}
-          onLogout={handleLogout}
-        />
-      </main>
+            <LoginSection
+              selectedRole={selectedRole}
+              onSelectRole={setSelectedRole}
+              currentUser={currentUser}
+              dbSnapshot={dbSnapshot}
+              dbError={dbError}
+              isLoadingDb={isLoadingDb}
+              onLoginSuccess={handleLoginSuccess}
+              onLogout={handleLogout}
+            />
+          </main>
 
-      <Footer />
-    </div>
+          <Footer />
+        </motion.div>
+      )}
+    </MotionConfig>
   );
 }

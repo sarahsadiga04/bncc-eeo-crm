@@ -1,4 +1,6 @@
 import {ArrowUp} from 'lucide-react';
+import {motion} from 'motion/react';
+import {EASE_OUT_EXPO} from '../utils/motion';
 
 export function Footer() {
   const scrollToTop = () => {
@@ -22,7 +24,13 @@ export function Footer() {
         </svg>
       </div>
 
-      <div className="mx-auto flex max-w-[1440px] flex-col items-center justify-between gap-6 px-5 pt-10 pb-14 sm:flex-row sm:px-10 sm:pt-14 sm:pb-20 md:px-14 lg:px-[69px] lg:pt-16 lg:pb-24">
+      <motion.div
+        initial={{opacity: 0, y: 14}}
+        whileInView={{opacity: 1, y: 0}}
+        viewport={{once: true, amount: 0.2}}
+        transition={{duration: 0.4, ease: EASE_OUT_EXPO}}
+        className="mx-auto flex max-w-[1440px] flex-col items-center justify-between gap-6 px-5 pt-10 pb-14 sm:flex-row sm:px-10 sm:pt-14 sm:pb-20 md:px-14 lg:px-[69px] lg:pt-16 lg:pb-24"
+      >
         <div className="text-center sm:text-left">
           <p className="text-xl sm:text-[22px] font-extrabold tracking-tight">Gather.in</p>
           <p className="mt-1.5 text-xs sm:text-sm text-white/85">
@@ -38,7 +46,7 @@ export function Footer() {
           <span>Kembali Ke Atas</span>
           <ArrowUp className="h-4 w-4 stroke-[2]" aria-hidden="true" />
         </button>
-      </div>
+      </motion.div>
     </footer>
   );
 }

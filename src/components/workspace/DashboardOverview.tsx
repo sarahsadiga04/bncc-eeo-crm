@@ -9,7 +9,13 @@ import {
   Plus,
   User,
 } from 'lucide-react';
+import {AnimatePresence, motion} from 'motion/react';
 import type {BnccEvent, PartnerRecord, UserAccount} from '../../types/database';
+import {
+  EASE_OUT_EXPO,
+  staggerContainerVariants,
+  staggerItemVariants,
+} from '../../utils/motion';
 import {
   computeEventSummary,
   formatRupiah,
@@ -110,9 +116,18 @@ export function DashboardOverview({
       </section>
 
       {/* 4-Column KPI + Quick Access Row */}
-      <section className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-[1fr_1fr_1fr_1.4fr]">
+      <motion.section
+        variants={staggerContainerVariants}
+        initial="hidden"
+        animate="visible"
+        className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-[1fr_1fr_1fr_1.4fr]"
+      >
         {/* Pending Card */}
-        <div className="rounded-2xl border border-[#DBEAFE] bg-white p-5">
+        <motion.div
+          variants={staggerItemVariants}
+          whileHover={{y: -2, transition: {duration: 0.15}}}
+          className="rounded-2xl border border-[#DBEAFE] bg-white p-5"
+        >
           <p className="text-[11px] font-extrabold tracking-wider text-[#B45309] uppercase">
             Status : Pending
           </p>
@@ -123,10 +138,14 @@ export function DashboardOverview({
             {summary.pendingCount}
           </p>
           <p className="mt-1 text-xs text-[#64748B]">Sedang follow-up D+3/D+7</p>
-        </div>
+        </motion.div>
 
         {/* Accept Card */}
-        <div className="rounded-2xl border border-[#DBEAFE] bg-white p-5">
+        <motion.div
+          variants={staggerItemVariants}
+          whileHover={{y: -2, transition: {duration: 0.15}}}
+          className="rounded-2xl border border-[#DBEAFE] bg-white p-5"
+        >
           <p className="text-[11px] font-extrabold tracking-wider text-[#15803D] uppercase">
             Status : Accept
           </p>
@@ -141,10 +160,14 @@ export function DashboardOverview({
               ? `Total Deal : ${formatRupiah(summary.totalDealValue)}`
               : 'Deal yang berhasil'}
           </p>
-        </div>
+        </motion.div>
 
         {/* Decline Card */}
-        <div className="rounded-2xl border border-[#DBEAFE] bg-white p-5">
+        <motion.div
+          variants={staggerItemVariants}
+          whileHover={{y: -2, transition: {duration: 0.15}}}
+          className="rounded-2xl border border-[#DBEAFE] bg-white p-5"
+        >
           <p className="text-[11px] font-extrabold tracking-wider text-[#475569] uppercase">
             Status : Decline
           </p>
@@ -155,10 +178,13 @@ export function DashboardOverview({
             {summary.declineCount}
           </p>
           <p className="mt-1 text-xs text-[#64748B]">Wajib tercatat alasan penolakan</p>
-        </div>
+        </motion.div>
 
         {/* Quick Menu Card */}
-        <div className="rounded-2xl border border-[#DBEAFE] bg-white p-5">
+        <motion.div
+          variants={staggerItemVariants}
+          className="rounded-2xl border border-[#DBEAFE] bg-white p-5"
+        >
           <p className="text-[11px] font-extrabold tracking-wider text-[#0755B1] uppercase">
             Akses Menu Cepat Event
           </p>
@@ -207,8 +233,8 @@ export function DashboardOverview({
               </button>
             )}
           </div>
-        </div>
-      </section>
+        </motion.div>
+      </motion.section>
 
       {/* Urgent Follow-Up Alert Box */}
       <section
@@ -235,11 +261,16 @@ export function DashboardOverview({
           </div>
         ) : (
           <div className="mt-4 divide-y divide-slate-100">
-            {urgentPartners.map(({partner, urgency}) => (
-              <div
-                key={partner.id}
-                className="flex flex-col gap-3 py-3.5 first:pt-1 last:pb-0 sm:flex-row sm:items-center sm:justify-between"
-              >
+            <AnimatePresence initial={false}>
+              {urgentPartners.map(({partner, urgency}) => (
+                <motion.div
+                  key={partner.id}
+                  initial={{opacity: 0, y: 8}}
+                  animate={{opacity: 1, y: 0}}
+                  exit={{opacity: 0, x: 16}}
+                  transition={{duration: 0.2, ease: EASE_OUT_EXPO}}
+                  className="flex flex-col gap-3 py-3.5 first:pt-1 last:pb-0 sm:flex-row sm:items-center sm:justify-between"
+                >
                 <div className="min-w-0">
                   <div className="flex flex-wrap items-center gap-2">
                     <p className="text-sm font-bold text-[#1E1E1E]">
@@ -280,9 +311,10 @@ export function DashboardOverview({
                     <span>Detail</span>
                     <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />
                   </button>
-                </div>
-              </div>
-            ))}
+                  </div>
+                </motion.div>
+              ))}
+            </AnimatePresence>
           </div>
         )}
       </section>
@@ -323,15 +355,23 @@ export function DashboardOverview({
           </div>
         ) : (
           <div className="mt-5 space-y-3">
-            {partners.map((partner) => {
+            {partners.map((partner, index) => {
               const urgency = getPartnerUrgency(partner);
               const doneBenefits = partner.benefits.filter((b) => b.completed).length;
               const nextMeeting = partner.meetings[0];
               const stepDef = TIMELINE_STEPS[Math.max(0, Math.min(8, partner.currentStep - 1))];
 
               return (
-                <div
+                <motion.div
                   key={partner.id}
+                  initial={{opacity: 0, y: 10}}
+                  animate={{opacity: 1, y: 0}}
+                  transition={{
+                    duration: 0.24,
+                    delay: Math.min(index * 0.04, 0.28),
+                    ease: EASE_OUT_EXPO,
+                  }}
+                  whileHover={{y: -2, transition: {duration: 0.15}}}
                   className={`rounded-2xl border p-4 transition-colors ${
                     urgency.isOverdue
                       ? 'border-red-200 bg-red-50/20'
@@ -408,7 +448,7 @@ export function DashboardOverview({
                       </button>
                     </div>
                   </div>
-                </div>
+                </motion.div>
               );
             })}
           </div>

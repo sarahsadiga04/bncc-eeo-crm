@@ -10,6 +10,7 @@ import {
   Video,
   X,
 } from 'lucide-react';
+import {AnimatePresence, motion} from 'motion/react';
 import type {
   ContactPersonInfo,
   DealResult,
@@ -17,6 +18,12 @@ import type {
   PartnerRecord,
   UserAccount,
 } from '../../types/database';
+import {
+  alertVariants,
+  EASE_OUT_EXPO,
+  modalBackdropVariants,
+  modalPanelVariants,
+} from '../../utils/motion';
 import {
   formatRupiah,
   getNowWibLabel,
@@ -176,13 +183,23 @@ export function PartnerDetailModal({
   };
 
   return (
-    <div
+    <motion.div
+      variants={modalBackdropVariants}
+      initial="hidden"
+      animate="visible"
+      exit="exit"
       className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/55 p-3 sm:p-6 overflow-y-auto"
       role="dialog"
       aria-modal="true"
       aria-labelledby="partner-detail-title"
     >
-      <div className="relative my-auto w-full max-w-[920px] max-h-[92vh] overflow-y-auto rounded-2xl bg-[#F3F8FD] shadow-2xl">
+      <motion.div
+        variants={modalPanelVariants}
+        initial="hidden"
+        animate="visible"
+        exit="exit"
+        className="relative my-auto w-full max-w-[920px] max-h-[92vh] overflow-y-auto rounded-2xl bg-[#F3F8FD] shadow-2xl"
+      >
         {/* Top Blue Header */}
         <div className="sticky top-0 z-10 flex items-start justify-between gap-4 bg-[#0755B1] px-6 py-5 text-white">
           <div className="min-w-0">
@@ -300,7 +317,13 @@ export function PartnerDetailModal({
             <div className="p-5">
               {/* TAB 1: FOLLOW UP & PROGRES */}
               {activeTab === 'followup' && (
-                <div className="space-y-5">
+                <motion.div
+                  key="tab-followup"
+                  initial={{opacity: 0, y: 6}}
+                  animate={{opacity: 1, y: 0}}
+                  transition={{duration: 0.18, ease: EASE_OUT_EXPO}}
+                  className="space-y-5"
+                >
                   <form
                     onSubmit={handleProgressSubmit}
                     className="rounded-2xl border border-[#BCD9FC] bg-[#E6F0FD]/55 p-4 sm:p-5 space-y-4"
@@ -316,15 +339,22 @@ export function PartnerDetailModal({
                       </span>
                     </div>
 
-                    {progressError && (
-                      <div
-                        role="alert"
-                        className="flex items-center gap-2 rounded-xl border border-red-200 bg-red-50 px-3 py-2 text-xs font-semibold text-red-700"
-                      >
-                        <AlertCircle className="h-4 w-4 shrink-0" aria-hidden="true" />
-                        <span>{progressError}</span>
-                      </div>
-                    )}
+                    <AnimatePresence>
+                      {progressError && (
+                        <motion.div
+                          key="progress-error"
+                          variants={alertVariants}
+                          initial="hidden"
+                          animate="visible"
+                          exit="exit"
+                          role="alert"
+                          className="flex items-center gap-2 rounded-xl border border-red-200 bg-red-50 px-3 py-2 text-xs font-semibold text-red-700"
+                        >
+                          <AlertCircle className="h-4 w-4 shrink-0" aria-hidden="true" />
+                          <span>{progressError}</span>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
 
                     <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                       <div>
@@ -464,29 +494,42 @@ export function PartnerDetailModal({
                       </div>
                     )}
                   </div>
-                </div>
+                </motion.div>
               )}
 
               {/* TAB 2: MEETING SCHEDULE */}
               {activeTab === 'meeting' && (
-                <div className="space-y-5">
-                  <form
-                    onSubmit={handleMeetingSubmit}
-                    className="rounded-2xl border border-[#BCD9FC] bg-[#E6F0FD]/55 p-4 sm:p-5 space-y-4"
-                  >
-                    <h3 className="text-base font-extrabold text-[#0755B1]">
-                      New Schedule
-                    </h3>
+                <motion.div
+                  key="tab-meeting"
+                  initial={{opacity: 0, y: 6}}
+                  animate={{opacity: 1, y: 0}}
+                  transition={{duration: 0.18, ease: EASE_OUT_EXPO}}
+                  className="space-y-5"
+                >
+                    <form
+                      onSubmit={handleMeetingSubmit}
+                      className="rounded-2xl border border-[#BCD9FC] bg-[#E6F0FD]/55 p-4 sm:p-5 space-y-4"
+                    >
+                      <h3 className="text-base font-extrabold text-[#0755B1]">
+                        New Schedule
+                      </h3>
 
-                    {meetingError && (
-                      <div
-                        role="alert"
-                        className="flex items-center gap-2 rounded-xl border border-red-200 bg-red-50 px-3 py-2 text-xs font-semibold text-red-700"
-                      >
-                        <AlertCircle className="h-4 w-4 shrink-0" aria-hidden="true" />
-                        <span>{meetingError}</span>
-                      </div>
-                    )}
+                      <AnimatePresence>
+                        {meetingError && (
+                          <motion.div
+                            key="meeting-error"
+                            variants={alertVariants}
+                            initial="hidden"
+                            animate="visible"
+                            exit="exit"
+                            role="alert"
+                            className="flex items-center gap-2 rounded-xl border border-red-200 bg-red-50 px-3 py-2 text-xs font-semibold text-red-700"
+                          >
+                            <AlertCircle className="h-4 w-4 shrink-0" aria-hidden="true" />
+                            <span>{meetingError}</span>
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
 
                     <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                       <div>
@@ -625,28 +668,39 @@ export function PartnerDetailModal({
                       </div>
                     )}
                   </div>
-                </div>
+                </motion.div>
               )}
 
               {/* TAB 3: PITCHING & GRADING (MANAGER ONLY) */}
               {activeTab === 'pitching' && isManager && (
-                <form
+                <motion.form
+                  key="tab-pitching"
+                  initial={{opacity: 0, y: 6}}
+                  animate={{opacity: 1, y: 0}}
+                  transition={{duration: 0.18, ease: EASE_OUT_EXPO}}
                   onSubmit={handlePitchingSubmit}
                   className="rounded-2xl border border-[#BCD9FC] bg-[#E6F0FD]/55 p-4 sm:p-5 space-y-4"
                 >
-                  <h3 className="text-base font-extrabold text-[#0755B1]">
-                    Summary &amp; Grading
-                  </h3>
+                    <h3 className="text-base font-extrabold text-[#0755B1]">
+                      Summary &amp; Grading
+                    </h3>
 
-                  {pitchingError && (
-                    <div
-                      role="alert"
-                      className="flex items-center gap-2 rounded-xl border border-red-200 bg-red-50 px-3 py-2 text-xs font-semibold text-red-700"
-                    >
-                      <AlertCircle className="h-4 w-4 shrink-0" aria-hidden="true" />
-                      <span>{pitchingError}</span>
-                    </div>
-                  )}
+                    <AnimatePresence>
+                      {pitchingError && (
+                        <motion.div
+                          key="pitching-error"
+                          variants={alertVariants}
+                          initial="hidden"
+                          animate="visible"
+                          exit="exit"
+                          role="alert"
+                          className="flex items-center gap-2 rounded-xl border border-red-200 bg-red-50 px-3 py-2 text-xs font-semibold text-red-700"
+                        >
+                          <AlertCircle className="h-4 w-4 shrink-0" aria-hidden="true" />
+                          <span>{pitchingError}</span>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
 
                   <div>
                     <label htmlFor="pitch-summary" className="block text-xs font-bold text-[#334155]">
@@ -722,32 +776,40 @@ export function PartnerDetailModal({
                     </div>
                   </div>
 
-                  {result === 'Decline' && (
-                    <div>
-                      <label htmlFor="pitch-decline-reason" className="block text-xs font-bold text-[#DC2626]">
-                        Alasan Penolakan (Wajib Diisi) *
-                      </label>
-                      <input
-                        id="pitch-decline-reason"
-                        type="text"
-                        value={rejectionReason}
-                        onChange={(e) => setRejectionReason(e.target.value)}
-                        placeholder="Contoh: Anggaran Q4 sudah penuh / fokus ke event lain..."
-                        className="mt-1.5 block h-10 w-full rounded-xl border border-red-300 bg-white px-3 text-sm text-[#1E1E1E] focus:border-red-500 focus:outline-none"
-                      />
-                    </div>
-                  )}
+                    <AnimatePresence>
+                      {result === 'Decline' && (
+                        <motion.div
+                          key="decline-reason-box"
+                          variants={alertVariants}
+                          initial="hidden"
+                          animate="visible"
+                          exit="exit"
+                        >
+                          <label htmlFor="pitch-decline-reason" className="block text-xs font-bold text-[#DC2626]">
+                            Alasan Penolakan (Wajib Diisi) *
+                          </label>
+                          <input
+                            id="pitch-decline-reason"
+                            type="text"
+                            value={rejectionReason}
+                            onChange={(e) => setRejectionReason(e.target.value)}
+                            placeholder="Contoh: Anggaran Q4 sudah penuh / fokus ke event lain..."
+                            className="mt-1.5 block h-10 w-full rounded-xl border border-red-300 bg-white px-3 text-sm text-[#1E1E1E] focus:border-red-500 focus:outline-none"
+                          />
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
 
-                  <div className="flex justify-end pt-1">
-                    <button
-                      type="submit"
-                      className="inline-flex min-h-[40px] items-center justify-center rounded-xl bg-[#0755B1] px-5 py-2 text-xs sm:text-sm font-bold text-white hover:bg-[#105EA9] cursor-pointer"
-                    >
-                      Simpan Keputusan Pitching
-                    </button>
-                  </div>
-                </form>
-              )}
+                    <div className="flex justify-end pt-1">
+                      <button
+                        type="submit"
+                        className="inline-flex min-h-[40px] items-center justify-center rounded-xl bg-[#0755B1] px-5 py-2 text-xs sm:text-sm font-bold text-white hover:bg-[#105EA9] cursor-pointer"
+                      >
+                        Simpan Keputusan Pitching
+                      </button>
+                    </div>
+                  </motion.form>
+                )}
             </div>
           </div>
 
@@ -770,17 +832,28 @@ export function PartnerDetailModal({
               </button>
             </div>
 
-            {cpNotice && (
-              <div
-                role="status"
-                className="mt-3 rounded-xl border border-emerald-200 bg-emerald-50 px-4 py-2.5 text-xs font-semibold text-emerald-800"
-              >
-                {cpNotice}
-              </div>
-            )}
+            <AnimatePresence>
+              {cpNotice && (
+                <motion.div
+                  key="cp-notice"
+                  variants={alertVariants}
+                  initial="hidden"
+                  animate="visible"
+                  exit="exit"
+                  role="status"
+                  className="mt-3 rounded-xl border border-emerald-200 bg-emerald-50 px-4 py-2.5 text-xs font-semibold text-emerald-800"
+                >
+                  {cpNotice}
+                </motion.div>
+              )}
+            </AnimatePresence>
 
             {editingCp ? (
-              <form
+              <motion.form
+                key="cp-edit-form"
+                initial={{opacity: 0, y: 6}}
+                animate={{opacity: 1, y: 0}}
+                transition={{duration: 0.18, ease: EASE_OUT_EXPO}}
                 onSubmit={handleCpSubmit}
                 className="mt-4 rounded-xl border border-[#BCD9FC] bg-[#F3F8FD] p-4 space-y-3"
               >
@@ -866,44 +939,50 @@ export function PartnerDetailModal({
                     {isManager ? 'Simpan Pembaruan CP' : 'Ajukan Pembaruan CP ke Manager'}
                   </button>
                 </div>
-              </form>
-            ) : (
-              <div className="mt-4 rounded-xl border border-[#BCD9FC] bg-[#F3F8FD] p-4">
-                <div className="flex flex-wrap items-center justify-between gap-2">
-                  <div>
-                    <p className="text-base font-bold text-[#0755B1]">
-                      {partner.contactPerson.name}
-                    </p>
-                    <p className="text-xs font-medium text-[#64748B]">
-                      {partner.contactPerson.position}
-                    </p>
+                </motion.form>
+              ) : (
+                <motion.div
+                  key="cp-read-card"
+                  initial={{opacity: 0, y: 6}}
+                  animate={{opacity: 1, y: 0}}
+                  transition={{duration: 0.18, ease: EASE_OUT_EXPO}}
+                  className="mt-4 rounded-xl border border-[#BCD9FC] bg-[#F3F8FD] p-4"
+                >
+                  <div className="flex flex-wrap items-center justify-between gap-2">
+                    <div>
+                      <p className="text-base font-bold text-[#0755B1]">
+                        {partner.contactPerson.name}
+                      </p>
+                      <p className="text-xs font-medium text-[#64748B]">
+                        {partner.contactPerson.position}
+                      </p>
+                    </div>
+                    <span
+                      className={`rounded-lg px-2.5 py-1 text-[11px] font-bold ${
+                        partner.contactPerson.isAvailable
+                          ? 'bg-emerald-50 text-[#15803D] border border-emerald-200'
+                          : 'bg-red-50 text-[#DC2626] border border-red-200'
+                      }`}
+                    >
+                      {partner.contactPerson.isAvailable ? 'Available' : 'Sudah Tidak Aktif'}
+                    </span>
                   </div>
-                  <span
-                    className={`rounded-lg px-2.5 py-1 text-[11px] font-bold ${
-                      partner.contactPerson.isAvailable
-                        ? 'bg-emerald-50 text-[#15803D] border border-emerald-200'
-                        : 'bg-red-50 text-[#DC2626] border border-red-200'
-                    }`}
-                  >
-                    {partner.contactPerson.isAvailable ? 'Available' : 'Sudah Tidak Aktif'}
-                  </span>
-                </div>
 
-                <div className="mt-3 flex items-center gap-2 rounded-lg border border-[#DBEAFE] bg-white px-3.5 py-2.5 text-xs sm:text-sm font-medium text-[#1E1E1E]">
-                  <Phone className="h-4 w-4 text-[#0755B1] shrink-0" aria-hidden="true" />
-                  <span>{partner.contactPerson.contact}</span>
-                </div>
+                  <div className="mt-3 flex items-center gap-2 rounded-lg border border-[#DBEAFE] bg-white px-3.5 py-2.5 text-xs sm:text-sm font-medium text-[#1E1E1E]">
+                    <Phone className="h-4 w-4 text-[#0755B1] shrink-0" aria-hidden="true" />
+                    <span>{partner.contactPerson.contact}</span>
+                  </div>
 
-                {partner.contactPerson.notes && (
-                  <p className="mt-2 text-xs text-[#475569]">
-                    Catatan: {partner.contactPerson.notes}
-                  </p>
-                )}
-              </div>
-            )}
+                  {partner.contactPerson.notes && (
+                    <p className="mt-2 text-xs text-[#475569]">
+                      Catatan: {partner.contactPerson.notes}
+                    </p>
+                  )}
+                </motion.div>
+              )}
           </div>
         </div>
-      </div>
-    </div>
+      </motion.div>
+    </motion.div>
   );
 }

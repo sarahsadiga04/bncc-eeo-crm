@@ -1,6 +1,8 @@
 import {useState, type FormEvent} from 'react';
 import {AlertCircle, X} from 'lucide-react';
+import {AnimatePresence, motion} from 'motion/react';
 import type {BnccEvent} from '../../types/database';
+import {alertVariants, modalBackdropVariants, modalPanelVariants} from '../../utils/motion';
 
 interface NewEventModalProps {
   onClose: () => void;
@@ -31,13 +33,23 @@ export function NewEventModal({onClose, onCreateEvent}: NewEventModalProps) {
   };
 
   return (
-    <div
+    <motion.div
+      variants={modalBackdropVariants}
+      initial="hidden"
+      animate="visible"
+      exit="exit"
       className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/55 p-4"
       role="dialog"
       aria-modal="true"
       aria-labelledby="new-event-title"
     >
-      <div className="w-full max-w-[460px] rounded-2xl bg-white p-6 shadow-2xl">
+      <motion.div
+        variants={modalPanelVariants}
+        initial="hidden"
+        animate="visible"
+        exit="exit"
+        className="w-full max-w-[460px] rounded-2xl bg-white p-6 shadow-2xl"
+      >
         <div className="flex items-center justify-between gap-2">
           <h2 id="new-event-title" className="text-lg font-extrabold text-[#0755B1]">
             Tambah Event BNCC Baru
@@ -53,12 +65,22 @@ export function NewEventModal({onClose, onCreateEvent}: NewEventModalProps) {
         </div>
 
         <form onSubmit={handleSubmit} className="mt-4 space-y-4">
-          {error && (
-            <div role="alert" className="flex items-center gap-2 rounded-xl bg-red-50 px-3 py-2 text-xs font-semibold text-red-700">
-              <AlertCircle className="h-4 w-4 shrink-0" aria-hidden="true" />
-              <span>{error}</span>
-            </div>
-          )}
+          <AnimatePresence>
+            {error && (
+              <motion.div
+                key="new-event-error"
+                variants={alertVariants}
+                initial="hidden"
+                animate="visible"
+                exit="exit"
+                role="alert"
+                className="flex items-center gap-2 rounded-xl bg-red-50 px-3 py-2 text-xs font-semibold text-red-700"
+              >
+                <AlertCircle className="h-4 w-4 shrink-0" aria-hidden="true" />
+                <span>{error}</span>
+              </motion.div>
+            )}
+          </AnimatePresence>
 
           <div>
             <label htmlFor="evt-name" className="block text-xs font-bold text-[#334155]">
@@ -134,7 +156,7 @@ export function NewEventModal({onClose, onCreateEvent}: NewEventModalProps) {
             </button>
           </div>
         </form>
-      </div>
-    </div>
+      </motion.div>
+    </motion.div>
   );
 }

@@ -1,11 +1,13 @@
 import {useMemo, useState} from 'react';
 import {Search} from 'lucide-react';
+import {motion} from 'motion/react';
 import type {
   ActivityCategory,
   ActivityLogItem,
   BnccEvent,
   UserAccount,
 } from '../../types/database';
+import {EASE_OUT_EXPO} from '../../utils/motion';
 import {redactActivityForRole} from '../../utils/pipeline';
 
 interface ActivityLogViewProps {
@@ -124,8 +126,18 @@ export function ActivityLogView({user, activeEvent, logs}: ActivityLogViewProps)
       ) : (
         <div className="rounded-2xl border border-[#DBEAFE] bg-white p-5 sm:p-6">
           <ol className="relative space-y-4 border-l-2 border-[#DBEAFE] pl-5">
-            {filteredLogs.map((log) => (
-              <li key={log.id} className="relative">
+            {filteredLogs.map((log, index) => (
+              <motion.li
+                key={log.id}
+                initial={{opacity: 0, y: 8}}
+                animate={{opacity: 1, y: 0}}
+                transition={{
+                  duration: 0.22,
+                  delay: Math.min(index * 0.03, 0.24),
+                  ease: EASE_OUT_EXPO,
+                }}
+                className="relative"
+              >
                 <span
                   aria-hidden="true"
                   className="absolute -left-[27px] top-4 h-3 w-3 rounded-full border-2 border-white bg-[#0755B1]"
@@ -156,7 +168,7 @@ export function ActivityLogView({user, activeEvent, logs}: ActivityLogViewProps)
                     Oleh: {log.actorName} ({log.actorRole})
                   </p>
                 </div>
-              </li>
+              </motion.li>
             ))}
           </ol>
         </div>

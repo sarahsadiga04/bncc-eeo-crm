@@ -1,6 +1,13 @@
 import {useState, type FormEvent} from 'react';
 import {AlertCircle, X} from 'lucide-react';
+import {AnimatePresence, motion} from 'motion/react';
 import type {BnccEvent, CpEditRequest} from '../../types/database';
+import {
+  alertVariants,
+  EASE_OUT_EXPO,
+  modalBackdropVariants,
+  modalPanelVariants,
+} from '../../utils/motion';
 
 interface EditApprovalViewProps {
   activeEvent: BnccEvent;
@@ -59,12 +66,21 @@ export function EditApprovalView({
         </div>
       ) : (
         <div className="space-y-4">
-          {pendingRequests.map((req) => (
-            <article
-              key={req.id}
-              data-testid={`pending-edit-card-${req.id}`}
-              className="rounded-2xl border border-amber-200 bg-white p-5 sm:p-6 shadow-sm"
-            >
+          <AnimatePresence initial={false}>
+            {pendingRequests.map((req, index) => (
+              <motion.article
+                key={req.id}
+                initial={{opacity: 0, y: 12}}
+                animate={{opacity: 1, y: 0}}
+                exit={{opacity: 0, x: 20}}
+                transition={{
+                  duration: 0.24,
+                  delay: Math.min(index * 0.05, 0.25),
+                  ease: EASE_OUT_EXPO,
+                }}
+                data-testid={`pending-edit-card-${req.id}`}
+                className="rounded-2xl border border-amber-200 bg-white p-5 sm:p-6 shadow-sm"
+              >
               <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
                 <div>
                   <div className="flex flex-wrap items-center gap-2">
@@ -148,8 +164,9 @@ export function EditApprovalView({
                   </dl>
                 </div>
               </div>
-            </article>
-          ))}
+              </motion.article>
+            ))}
+          </AnimatePresence>
         </div>
       )}
 
@@ -196,14 +213,26 @@ export function EditApprovalView({
       </div>
 
       {/* Reject Reason Modal */}
-      {rejectingRequest && (
-        <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/55 p-4"
-          role="dialog"
-          aria-modal="true"
-          aria-labelledby="reject-modal-title"
-        >
-          <div className="w-full max-w-[480px] rounded-2xl bg-white p-6 shadow-2xl">
+      <AnimatePresence>
+        {rejectingRequest && (
+          <motion.div
+            key="reject-reason-modal"
+            variants={modalBackdropVariants}
+            initial="hidden"
+            animate="visible"
+            exit="exit"
+            className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/55 p-4"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="reject-modal-title"
+          >
+            <motion.div
+              variants={modalPanelVariants}
+              initial="hidden"
+              animate="visible"
+              exit="exit"
+              className="w-full max-w-[480px] rounded-2xl bg-white p-6 shadow-2xl"
+            >
             <div className="flex items-center justify-between gap-2">
               <h2 id="reject-modal-title" className="text-lg font-extrabold text-[#DC2626]">
                 Tolak Permintaan Edit
@@ -222,12 +251,22 @@ export function EditApprovalView({
             </p>
 
             <form onSubmit={handleRejectSubmit} className="mt-4 space-y-4">
-              {rejectError && (
-                <div role="alert" className="flex items-center gap-2 rounded-xl bg-red-50 px-3 py-2 text-xs font-semibold text-red-700">
-                  <AlertCircle className="h-4 w-4 shrink-0" aria-hidden="true" />
-                  <span>{rejectError}</span>
-                </div>
-              )}
+              <AnimatePresence>
+                {rejectError && (
+                  <motion.div
+                    key="reject-error"
+                    variants={alertVariants}
+                    initial="hidden"
+                    animate="visible"
+                    exit="exit"
+                    role="alert"
+                    className="flex items-center gap-2 rounded-xl bg-red-50 px-3 py-2 text-xs font-semibold text-red-700"
+                  >
+                    <AlertCircle className="h-4 w-4 shrink-0" aria-hidden="true" />
+                    <span>{rejectError}</span>
+                  </motion.div>
+                )}
+              </AnimatePresence>
 
               <div>
                 <label htmlFor="reject-reason-input" className="sr-only">
@@ -259,9 +298,10 @@ export function EditApprovalView({
                 </button>
               </div>
             </form>
-          </div>
-        </div>
-      )}
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }

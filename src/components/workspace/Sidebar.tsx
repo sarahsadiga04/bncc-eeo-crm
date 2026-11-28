@@ -12,7 +12,9 @@ import {
   RotateCcw,
   X,
 } from 'lucide-react';
+import {AnimatePresence, motion} from 'motion/react';
 import type {BnccEvent, UserAccount} from '../../types/database';
+import {drawerBackdropVariants, drawerPanelVariants} from '../../utils/motion';
 
 export type WorkspaceView =
   | 'dashboard'
@@ -156,10 +158,11 @@ export function Sidebar({
               const isActive = activeView === item.id;
               return (
                 <li key={item.id}>
-                  <button
+                  <motion.button
                     type="button"
                     onClick={() => handleNavClick(item.id)}
                     aria-current={isActive ? 'page' : undefined}
+                    whileTap={{scale: 0.985}}
                     className={`flex min-h-[44px] w-full items-center justify-between gap-2 rounded-xl px-3.5 py-2.5 text-left text-sm font-semibold transition-colors whitespace-nowrap cursor-pointer ${
                       isActive
                         ? 'bg-[#0755B1] text-white shadow-sm'
@@ -171,7 +174,9 @@ export function Sidebar({
                       <span className="truncate">{item.label}</span>
                     </span>
                     {typeof item.badge === 'number' && item.badge > 0 && (
-                      <span
+                      <motion.span
+                        initial={{scale: 0.7, opacity: 0}}
+                        animate={{scale: 1, opacity: 1}}
                         className={`inline-flex h-5 min-w-[20px] items-center justify-center rounded-full px-1.5 font-mono text-[11px] font-bold tabular-nums ${
                           isActive
                             ? 'bg-white text-[#0755B1]'
@@ -179,9 +184,9 @@ export function Sidebar({
                         }`}
                       >
                         {item.badge}
-                      </span>
+                      </motion.span>
                     )}
-                  </button>
+                  </motion.button>
                 </li>
               );
             })}
@@ -263,25 +268,37 @@ export function Sidebar({
       </header>
 
       {/* Mobile Drawer */}
-      {mobileOpen && (
-        <div className="fixed inset-0 z-50 flex lg:hidden" role="dialog" aria-modal="true" aria-label="Menu Navigasi">
-          <div
-            className="fixed inset-0 bg-slate-900/45"
-            onClick={() => setMobileOpen(false)}
-          />
-          <aside className="relative z-10 flex h-full w-[280px] max-w-[85vw] flex-col bg-white shadow-2xl">
-            <button
-              type="button"
+      <AnimatePresence>
+        {mobileOpen && (
+          <div className="fixed inset-0 z-50 flex lg:hidden" role="dialog" aria-modal="true" aria-label="Menu Navigasi">
+            <motion.div
+              variants={drawerBackdropVariants}
+              initial="hidden"
+              animate="visible"
+              exit="exit"
+              className="fixed inset-0 bg-slate-900/45"
               onClick={() => setMobileOpen(false)}
-              aria-label="Tutup menu navigasi"
-              className="absolute top-4 right-4 inline-flex h-10 w-10 items-center justify-center rounded-lg text-slate-500 hover:bg-slate-100"
+            />
+            <motion.aside
+              variants={drawerPanelVariants}
+              initial="hidden"
+              animate="visible"
+              exit="exit"
+              className="relative z-10 flex h-full w-[280px] max-w-[85vw] flex-col bg-white shadow-2xl"
             >
-              <X className="h-5 w-5" aria-hidden="true" />
-            </button>
-            <div className="h-full overflow-y-auto">{sidebarContent}</div>
-          </aside>
-        </div>
-      )}
+              <button
+                type="button"
+                onClick={() => setMobileOpen(false)}
+                aria-label="Tutup menu navigasi"
+                className="absolute top-4 right-4 inline-flex h-10 w-10 items-center justify-center rounded-lg text-slate-500 hover:bg-slate-100"
+              >
+                <X className="h-5 w-5" aria-hidden="true" />
+              </button>
+              <div className="h-full overflow-y-auto">{sidebarContent}</div>
+            </motion.aside>
+          </div>
+        )}
+      </AnimatePresence>
 
       {/* Desktop Fixed Sidebar */}
       <aside className="hidden lg:block lg:w-[272px] lg:shrink-0 lg:border-r lg:border-[#DBEAFE] lg:bg-white">

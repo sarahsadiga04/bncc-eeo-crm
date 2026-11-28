@@ -1,6 +1,8 @@
 import {useState, type ChangeEvent} from 'react';
 import {CheckCircle2, Upload} from 'lucide-react';
+import {AnimatePresence, motion} from 'motion/react';
 import type {BnccEvent, PartnerRecord, UserAccount} from '../../types/database';
+import {alertVariants} from '../../utils/motion';
 import {
   formatShortDate,
   getNowWibLabel,
@@ -175,26 +177,33 @@ export function SpreadsheetImportView({
         </div>
       </div>
 
-      {importedCount !== null && (
-        <div
-          role="status"
-          className="flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-emerald-200 bg-emerald-50 px-5 py-4"
-        >
-          <div className="flex items-center gap-2.5 text-sm font-bold text-emerald-900">
-            <CheckCircle2 className="h-5 w-5 text-[#16A34A] shrink-0" aria-hidden="true" />
-            <span>
-              Berhasil mengimpor {importedCount} proposal baru ke {activeEvent.name} beserta jadwal reminder D+3 &amp; D+7.
-            </span>
-          </div>
-          <button
-            type="button"
-            onClick={onGoToSponsorshipList}
-            className="rounded-xl bg-[#16A34A] px-4 py-2 text-xs font-bold text-white hover:bg-[#15803D] cursor-pointer"
+      <AnimatePresence>
+        {importedCount !== null && (
+          <motion.div
+            key="import-success-banner"
+            variants={alertVariants}
+            initial="hidden"
+            animate="visible"
+            exit="exit"
+            role="status"
+            className="flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-emerald-200 bg-emerald-50 px-5 py-4"
           >
-            Lihat Daftar Sponsorship
-          </button>
-        </div>
-      )}
+            <div className="flex items-center gap-2.5 text-sm font-bold text-emerald-900">
+              <CheckCircle2 className="h-5 w-5 text-[#16A34A] shrink-0" aria-hidden="true" />
+              <span>
+                Berhasil mengimpor {importedCount} proposal baru ke {activeEvent.name} beserta jadwal reminder D+3 &amp; D+7.
+              </span>
+            </div>
+            <button
+              type="button"
+              onClick={onGoToSponsorshipList}
+              className="rounded-xl bg-[#16A34A] px-4 py-2 text-xs font-bold text-white hover:bg-[#15803D] cursor-pointer"
+            >
+              Lihat Daftar Sponsorship
+            </button>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* Preview Table Card */}
       <div className="rounded-2xl border border-[#DBEAFE] bg-white p-5 sm:p-6">

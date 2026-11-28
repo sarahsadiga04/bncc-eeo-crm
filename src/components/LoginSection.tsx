@@ -1,8 +1,10 @@
 import {useState, type FormEvent} from 'react';
 import {AlertCircle, CheckCircle2, Database, Eye, EyeOff, Lock, LogOut, ShieldCheck} from 'lucide-react';
+import {AnimatePresence, motion} from 'motion/react';
 import type {UserAccount, UserRole} from '../types/database';
 import type {PrototypeDatabaseSnapshot} from '../services/jsonDb';
 import {authenticateUser, getRoleConfig, validateLoginInput} from '../utils/auth';
+import {alertVariants, EASE_OUT_EXPO} from '../utils/motion';
 
 interface LoginSectionProps {
   selectedRole: UserRole;
@@ -83,9 +85,18 @@ export function LoginSection({
       aria-labelledby="login-heading"
       className="bg-white py-14 sm:py-20 lg:py-24"
     >
-      <div className="mx-auto max-w-[733px] px-5 sm:px-6">
+      <motion.div
+        initial={{opacity: 0, y: 20}}
+        whileInView={{opacity: 1, y: 0}}
+        viewport={{once: true, amount: 0.1}}
+        transition={{duration: 0.45, ease: EASE_OUT_EXPO}}
+        className="mx-auto max-w-[733px] px-5 sm:px-6"
+      >
         {currentUser ? (
-          <div
+          <motion.div
+            initial={{opacity: 0, scale: 0.98, y: 12}}
+            animate={{opacity: 1, scale: 1, y: 0}}
+            transition={{duration: 0.35, ease: EASE_OUT_EXPO}}
             data-testid="authenticated-session-panel"
             className="rounded-[20px] border-2 border-[#83B1EC]/70 bg-white p-6 sm:p-9 shadow-[0_6px_20px_rgba(36,84,171,0.08)]"
           >
@@ -168,7 +179,7 @@ export function LoginSection({
                 </p>
               </div>
             )}
-          </div>
+          </motion.div>
         ) : (
           <div>
             {/* Section Title & Subtitle matching SVG */}
@@ -195,12 +206,14 @@ export function LoginSection({
                 const isSelected = selectedRole === role;
 
                 return (
-                  <button
+                  <motion.button
                     key={role}
                     type="button"
                     role="radio"
                     aria-checked={isSelected}
                     onClick={() => handleRoleSwitch(role)}
+                    whileHover={{y: -2, transition: {duration: 0.15}}}
+                    whileTap={{scale: 0.985}}
                     className={`relative flex min-h-[88px] flex-col items-start justify-center rounded-[15px] px-7 py-5 text-left transition-all duration-150 cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2454AB] ${
                       isSelected
                         ? 'border-2 border-[#2454AB]/81 bg-[#BCD9FC]/51 shadow-[0_4px_10px_rgba(0,0,0,0.16)]'
@@ -214,38 +227,56 @@ export function LoginSection({
                       {cfg.label}
                     </span>
 
-                    {isSelected && (
-                      <span
-                        aria-hidden="true"
-                        className="absolute top-5 right-5 h-3.5 w-3.5 rounded-full bg-[#2454AB]"
-                      />
-                    )}
-                  </button>
+                    <AnimatePresence>
+                      {isSelected && (
+                        <motion.span
+                          aria-hidden="true"
+                          initial={{scale: 0, opacity: 0}}
+                          animate={{scale: 1, opacity: 1}}
+                          exit={{scale: 0, opacity: 0}}
+                          transition={{type: 'spring', stiffness: 500, damping: 28}}
+                          className="absolute top-5 right-5 h-3.5 w-3.5 rounded-full bg-[#2454AB]"
+                        />
+                      )}
+                    </AnimatePresence>
+                  </motion.button>
                 );
               })}
             </div>
 
             {/* Login Form matching SVG */}
             <form onSubmit={handleSubmit} noValidate className="mt-9 sm:mt-10 space-y-6">
-              {dbError && (
-                <div
-                  role="alert"
-                  className="flex items-start gap-2.5 rounded-[10px] border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700"
-                >
-                  <AlertCircle className="mt-0.5 h-4 w-4 shrink-0" aria-hidden="true" />
-                  <span>{dbError}</span>
-                </div>
-              )}
+              <AnimatePresence>
+                {dbError && (
+                  <motion.div
+                    key="db-error"
+                    variants={alertVariants}
+                    initial="hidden"
+                    animate="visible"
+                    exit="exit"
+                    role="alert"
+                    className="flex items-start gap-2.5 rounded-[10px] border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700"
+                  >
+                    <AlertCircle className="mt-0.5 h-4 w-4 shrink-0" aria-hidden="true" />
+                    <span>{dbError}</span>
+                  </motion.div>
+                )}
 
-              {formError && (
-                <div
-                  role="alert"
-                  className="flex items-start gap-2.5 rounded-[10px] border border-red-200 bg-red-50 px-4 py-3 text-sm font-medium text-red-700"
-                >
-                  <AlertCircle className="mt-0.5 h-4 w-4 shrink-0" aria-hidden="true" />
-                  <span>{formError}</span>
-                </div>
-              )}
+                {formError && (
+                  <motion.div
+                    key="form-error"
+                    variants={alertVariants}
+                    initial="hidden"
+                    animate="visible"
+                    exit="exit"
+                    role="alert"
+                    className="flex items-start gap-2.5 rounded-[10px] border border-red-200 bg-red-50 px-4 py-3 text-sm font-medium text-red-700"
+                  >
+                    <AlertCircle className="mt-0.5 h-4 w-4 shrink-0" aria-hidden="true" />
+                    <span>{formError}</span>
+                  </motion.div>
+                )}
+              </AnimatePresence>
 
               {/* Email Field */}
               <div>
@@ -275,11 +306,21 @@ export function LoginSection({
                       : 'border-[#5587CE]/29 focus:border-[#2454AB] focus:ring-[#83B1EC]/40'
                   }`}
                 />
-                {emailFieldError && (
-                  <p id="email-error" className="mt-1.5 text-xs font-medium text-red-600">
-                    {emailFieldError}
-                  </p>
-                )}
+                <AnimatePresence>
+                  {emailFieldError && (
+                    <motion.p
+                      key="email-error"
+                      variants={alertVariants}
+                      initial="hidden"
+                      animate="visible"
+                      exit="exit"
+                      id="email-error"
+                      className="mt-1.5 text-xs font-medium text-red-600"
+                    >
+                      {emailFieldError}
+                    </motion.p>
+                  )}
+                </AnimatePresence>
               </div>
 
               {/* Password Field */}
@@ -330,11 +371,21 @@ export function LoginSection({
                     )}
                   </button>
                 </div>
-                {passwordFieldError && (
-                  <p id="password-error" className="mt-1.5 text-xs font-medium text-red-600">
-                    {passwordFieldError}
-                  </p>
-                )}
+                <AnimatePresence>
+                  {passwordFieldError && (
+                    <motion.p
+                      key="password-error"
+                      variants={alertVariants}
+                      initial="hidden"
+                      animate="visible"
+                      exit="exit"
+                      id="password-error"
+                      className="mt-1.5 text-xs font-medium text-red-600"
+                    >
+                      {passwordFieldError}
+                    </motion.p>
+                  )}
+                </AnimatePresence>
               </div>
 
               {/* Submit Button matching SVG */}
@@ -370,7 +421,7 @@ export function LoginSection({
             </form>
           </div>
         )}
-      </div>
+      </motion.div>
     </section>
   );
 }
